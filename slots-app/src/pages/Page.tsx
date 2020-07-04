@@ -35,7 +35,7 @@ const Page: React.FC = () => {
             {page}
             <IonFooter>
                 <IonToolbar>
-                    <IonTitle>Footer</IonTitle>
+                    <IonTitle></IonTitle>
                 </IonToolbar>
             </IonFooter>
         </IonPage>
