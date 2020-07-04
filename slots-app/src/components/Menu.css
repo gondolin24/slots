@@ -110,4 +110,12 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
-} 
+}
+.ion-color-money{
+  --ion-color-base: #2dd36f;
+  --ion-color-base-rgb: 45,211,111;
+  --ion-color-contrast: #fefefe;
+  --ion-color-contrast-rgb: 0,0,0;
+  --ion-color-shade: #28ba62;
+  --ion-color-tint: #42d77d;
+}

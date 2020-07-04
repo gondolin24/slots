@@ -1,34 +1,45 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {IonButtons, IonFooter, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import React from 'react';
-import { useParams } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
+import {useParams} from 'react-router';
 import './Page.css';
+import Bank from "../components/bank/Bank";
+import DefaultPage from "../components/DefaultPage";
+import Slots from "../components/slots/Slots";
 
 const Page: React.FC = () => {
 
-  const { name } = useParams<{ name: string; }>();
+    const {name} = useParams<{ name: string; }>();
+    let page = null
+    switch (name) {
+        case 'Slots' :
+            page = <Slots/>
+            break
+        case 'tt':
+            page = <Bank/>
+            break
+        default :
+            page = <DefaultPage/>
+    }
 
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    return (
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton/>
+                    </IonButtons>
+                    <IonTitle>{name}</IonTitle>
+                </IonToolbar>
+            </IonHeader>
 
-      <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name={name} />
-      </IonContent>
-    </IonPage>
-  );
+            {page}
+            <IonFooter>
+                <IonToolbar>
+                    <IonTitle>Footer</IonTitle>
+                </IonToolbar>
+            </IonFooter>
+        </IonPage>
+    );
 };
 
 export default Page;
