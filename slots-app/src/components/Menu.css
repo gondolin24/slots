@@ -119,3 +119,13 @@ ion-item.selected {
   --ion-color-shade: #28ba62;
   --ion-color-tint: #42d77d;
 }
+
+lottie-player {
+  background: #3a7be0;
+  transform: scale(0.57);
+}
+
+.derp{
+  height: 325px;
+  background: #3a7be0;
+}
