@@ -17,13 +17,7 @@ import {Temp} from "../../models/Temp";
 import LottieStuff from "./LottieStuff";
 
 
-function wait(ms) {
-    var start = new Date().getTime();
-    var end = start;
-    while (end < start + ms) {
-        end = new Date().getTime();
-    }
-}
+
 
 const Slots: React.FC = () => {
 
