@@ -11,22 +11,14 @@ import {
 } from '@ionic/react';
 
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {
-  archiveOutline,
-  archiveSharp,
-  bookmarkOutline, cardOutline,
-  cardSharp, gameControllerOutline, gameControllerSharp, glasses, glassesOutline, glassesSharp,
-  heartOutline,
-  heartSharp,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp
+  cardOutline,
+  cardSharp,
+  gameControllerOutline,
+  gameControllerSharp,
+  glassesOutline,
+  glassesSharp
 } from 'ionicons/icons';
 import './Menu.css';
 
