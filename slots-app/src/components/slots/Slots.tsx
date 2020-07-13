@@ -3,29 +3,31 @@ import React, {useState} from 'react';
 import {Temp} from "../../models/Temp";
 import LottieStuff from "./LottieStuff";
 import {BetService} from "../../BetService";
+import Lottieplayer from "../LottiePlayer";
+import animatedData from '../../lottie-files/Standard.json'
 
 
 function Greeting() {
-    const url = 'https://assets6.lottiefiles.com/packages/lf20_KDKNot.json'
-    return <LottieStuff lottieUrl={url}/>
+    return <Lottieplayer source={animatedData} />
 }
 
-function Lost() {
-    const url = 'https://assets8.lottiefiles.com/private_files/lf30_GjhcdO.json'
-    return <LottieStuff lottieUrl={url}/>
-}
+//
+// function Lost() {
+//     const url = 'https://assets8.lottiefiles.com/private_files/lf30_GjhcdO.json'
+//     return <LottieStuff lottieUrl={url}/>
+// }
+//
+// function Win() {
+//     const url = 'https://assets7.lottiefiles.com/private_files/lf30_4uTjNk.json'
+//     return <LottieStuff lottieUrl={url}/>
+// }
 
-function Win() {
-    const url = 'https://assets7.lottiefiles.com/private_files/lf30_4uTjNk.json'
-    return <LottieStuff lottieUrl={url}/>
-}
-
-function SpinResult(win: boolean) {
-    if (win) return Win()
-
-    return Lost()
-
-}
+// function SpinResult(win: boolean) {
+//     if (win) return Win()
+//
+//     return Lost()
+//
+// }
 
 const Slots: React.FC = () => {
     const betService = new BetService({})
@@ -84,7 +86,7 @@ const Slots: React.FC = () => {
                 duration={5000}
             />
             <IonModal isOpen={showModal}>
-                {SpinResult(didWin)}
+                {/*{SpinResult(didWin)}*/}
                 <IonButton onClick={() => setShowModal(false)}>Thanks for playing</IonButton>
             </IonModal>
         </IonContent>
