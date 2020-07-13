@@ -8,7 +8,10 @@ import {AppMetaData} from "../../models/AppMetaData";
 
 
 function Greeting() {
-    return <Lottieplayer source={animatedData} />
+    return (
+        <div className={'derp'}>
+            <Lottieplayer source={animatedData}/>
+        </div>)
 }
 
 //

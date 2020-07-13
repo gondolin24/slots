@@ -121,8 +121,7 @@ ion-item.selected {
 }
 
 lottie-player {
-  background: #3a7be0;
-  transform: scale(0.57);
+  transform: scale(1);
 }
 
 .derp{
@@ -130,4 +129,7 @@ lottie-player {
   background: #3a7be0;
 }
 
+.modalLottie{
+  height: 250px;
+}
 
