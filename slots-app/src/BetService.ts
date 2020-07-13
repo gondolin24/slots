@@ -6,7 +6,7 @@ export class BetService {
 
     getSpinResults() {
         const random = Math.floor(Math.random() * 100)
-        return random < 45
+        return random < 54
     }
 
     getCashAmount() {
