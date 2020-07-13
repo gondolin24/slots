@@ -120,9 +120,6 @@ ion-item.selected {
   --ion-color-tint: #42d77d;
 }
 
-lottie-player {
-  transform: scale(1);
-}
 
 .derp{
   height: 325px;
@@ -132,4 +129,16 @@ lottie-player {
 .modalLottie{
   height: 250px;
 }
+.loser{
+  height: 325px;
+background: #e3342f;
+}
 
+.winner{
+  height: 325px;
+  background: #38c172;
+}
+.winnerNoneGreen{
+  height: 325px;
+
+}

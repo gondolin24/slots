@@ -3,21 +3,24 @@ import React, {useState} from 'react';
 import {BetService} from "../../BetService";
 import Lottieplayer from "../LottiePlayer";
 import animatedData from '../../lottie-files/Standard.json'
-import {AppMetaData} from "../../models/AppMetaData";
+import ModalResult from "../ModalResult";
 
 
 function Greeting() {
     return (
         <div className={'derp'}>
-            <Lottieplayer source={animatedData}/>
+            <Lottieplayer source={animatedData} animationDefault={false}/>
         </div>)
 }
 
-
-const Slots: React.FC = () => {
+interface SlotsInterface {
+    setMetaData: (val: any) => void
+    metaData: any
+}
+const Slots: React.FC <SlotsInterface>= (props) => {
     const betService = new BetService({})
+    const {metaData} = props
 
-    const [metaData, setMetaData] = useState(new AppMetaData(100));
     const [betAmount, setBetAmount] = useState(25)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 25
@@ -31,6 +34,9 @@ const Slots: React.FC = () => {
         setShowLoading(false);
     }, 2000);
 
+    const setChildModal = (val: boolean) => {
+        setShowModal(val)
+    }
 
     // @ts-ignore
     return (
@@ -68,12 +74,10 @@ const Slots: React.FC = () => {
                     setShowModal(true)
                 }}
                 message={'Calculating Winnings'}
-                duration={5000}
+                duration={4000}
             />
-            <IonModal isOpen={showModal}>
-                {/*{SpinResult(didWin)}*/}
-                <IonButton onClick={() => setShowModal(false)}>Thanks for playing</IonButton>
-            </IonModal>
+            <ModalResult betAmount={betAmount} setShowModal={setChildModal} showModal={showModal} didWin={didWin}
+                         metaData={metaData} setSetMetaData={props.setMetaData}/>
         </IonContent>
     );
 };

@@ -7,7 +7,9 @@ export class AppMetaData {
 
     toJson() {
         return {
-            bankBalance: this.bankBalance
+            metaData: {
+                bankBalance: this.bankBalance
+            }
         }
     }
 

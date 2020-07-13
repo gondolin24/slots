@@ -3,15 +3,17 @@ import Lottie from 'react-lottie'
 
 interface LottieInterFace {
     source: any
+    animationDefault: boolean
     style ?: React.CSSProperties
 }
 
 const Lottieplayer: React.FC <LottieInterFace>= (props) => {
-
+    const {animationDefault} = props
+    const anData = (animationDefault)? props.source.default: props.source
     const defaultOptions = {
         loop: true,
         autoplay: true,
-        animationData: props.source,
+        animationData: anData,
         rendererSettings: {
             preserveAspectRatio: "xMidYMid slice"
         }

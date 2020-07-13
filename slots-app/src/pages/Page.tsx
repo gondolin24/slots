@@ -1,18 +1,48 @@
 import {IonButtons, IonFooter, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import './Page.css';
 import Bank from "../components/bank/Bank";
 import DefaultPage from "../components/DefaultPage";
 import Slots from "../components/slots/Slots";
+import {AppMetaData} from "../models/AppMetaData";
+import _ from "lodash";
+
+import {Plugins} from '@capacitor/core';
+
+const {Storage} = Plugins
+
 
 const Page: React.FC = () => {
 
     const {name} = useParams<{ name: string; }>();
     let page = null
+    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000));
+    const [inital, setInitial] = useState(true);
+
+    useEffect(() => {
+        Storage.get({key: 'metaData'}).then((result) => {
+            const val: string = _.get(result, 'value') || '{}'
+            const parsed = JSON.parse(val)
+            if ((_.get(parsed, 'metaData')) && (inital)) {
+                const json = _.get(parsed, 'metaData')
+                const metaData = AppMetaData.fromJson(json)
+                setAppMetaData(metaData)
+                setInitial(false)
+            }
+        }).catch(() => {
+
+        })
+    })
+
+    const setChildMetaData = (val: any) => {
+        setAppMetaData(val)
+    }
+
+
     switch (name) {
         case 'Slots' :
-            page = <Slots/>
+            page = <Slots metaData={appMetaData} setMetaData={setChildMetaData}/>
             break
         case 'tt':
             page = <Bank/>
