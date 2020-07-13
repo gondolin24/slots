@@ -1,6 +1,5 @@
 import {IonButton, IonCard, IonContent, IonItem, IonLabel, IonLoading, IonModal, IonRange} from '@ionic/react';
 import React, {useState} from 'react';
-import LottieStuff from "./LottieStuff";
 import {BetService} from "../../BetService";
 import Lottieplayer from "../LottiePlayer";
 import animatedData from '../../lottie-files/Standard.json'
@@ -14,23 +13,6 @@ function Greeting() {
         </div>)
 }
 
-//
-// function Lost() {
-//     const url = 'https://assets8.lottiefiles.com/private_files/lf30_GjhcdO.json'
-//     return <LottieStuff lottieUrl={url}/>
-// }
-//
-// function Win() {
-//     const url = 'https://assets7.lottiefiles.com/private_files/lf30_4uTjNk.json'
-//     return <LottieStuff lottieUrl={url}/>
-// }
-
-// function SpinResult(win: boolean) {
-//     if (win) return Win()
-//
-//     return Lost()
-//
-// }
 
 const Slots: React.FC = () => {
     const betService = new BetService({})
