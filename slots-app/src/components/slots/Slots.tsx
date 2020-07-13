@@ -4,6 +4,7 @@ import {BetService} from "../../BetService";
 import Lottieplayer from "../LottiePlayer";
 import animatedData from '../../lottie-files/Standard.json'
 import ModalResult from "../ModalResult";
+import _ from "lodash";
 
 
 function Greeting() {
@@ -17,7 +18,8 @@ interface SlotsInterface {
     setMetaData: (val: any) => void
     metaData: any
 }
-const Slots: React.FC <SlotsInterface>= (props) => {
+
+const Slots: React.FC<SlotsInterface> = (props) => {
     const betService = new BetService({})
     const {metaData} = props
 
@@ -38,7 +40,6 @@ const Slots: React.FC <SlotsInterface>= (props) => {
         setShowModal(val)
     }
 
-    // @ts-ignore
     return (
         <IonContent>
             <IonItem>
@@ -59,7 +60,10 @@ const Slots: React.FC <SlotsInterface>= (props) => {
 
             <IonItem>
                 <IonRange min={0} max={metaData.bankBalance} color="money" pin={true}
-                          onIonChange={e => setBetAmount(e.detail.value)}>
+                          onIonChange={e => {
+                              const value: number = _.get(e, 'detail.value', 0)
+                              setBetAmount(value)
+                          }}>
                     <IonLabel slot="start">25</IonLabel>
                     <IonLabel slot="end">{metaData.bankBalance}</IonLabel>
                 </IonRange>
