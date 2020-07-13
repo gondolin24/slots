@@ -1,10 +1,10 @@
 import {IonButton, IonCard, IonContent, IonItem, IonLabel, IonLoading, IonModal, IonRange} from '@ionic/react';
 import React, {useState} from 'react';
-import {Temp} from "../../models/Temp";
 import LottieStuff from "./LottieStuff";
 import {BetService} from "../../BetService";
 import Lottieplayer from "../LottiePlayer";
 import animatedData from '../../lottie-files/Standard.json'
+import {AppMetaData} from "../../models/AppMetaData";
 
 
 function Greeting() {
@@ -32,7 +32,7 @@ function Greeting() {
 const Slots: React.FC = () => {
     const betService = new BetService({})
 
-    const [metaData, setMetaData] = useState(new Temp(100));
+    const [metaData, setMetaData] = useState(new AppMetaData(100));
     const [betAmount, setBetAmount] = useState(25)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 25
