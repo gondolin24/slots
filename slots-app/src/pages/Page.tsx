@@ -19,7 +19,7 @@ const Page: React.FC = () => {
 
     const {name} = useParams<{ name: string; }>();
     let page = null
-    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0));
+    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0));
     const [inital, setInitial] = useState(true);
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const Page: React.FC = () => {
             page = <PathNotes/>
             break
         case 'Rewards':
-           page = <Rewards/>
+            page = <Rewards/>
             break
         default :
             page = <DefaultPage/>

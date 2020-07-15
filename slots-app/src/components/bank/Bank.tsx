@@ -22,7 +22,7 @@ const Bank: React.FC<BankProps> = (props) => {
                 <IonAvatar slot={'start'}>
                     <img src="https://emoji.gg/assets/emoji/6312_poohdance.gif"/>
                 </IonAvatar> <IonLabel>Special Coins</IonLabel>
-                <IonBadge color={'dark'} slot="end">0</IonBadge>
+                <IonBadge color={'dark'} slot="end">{props.metaData.specialCoins}</IonBadge>
             </IonItem>
             <IonItem>
                 <IonAvatar slot={'start'}>

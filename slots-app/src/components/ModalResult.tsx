@@ -54,6 +54,7 @@ function SpinResult(win: boolean) {
 
 const ModalResult: React.FC<ModelProps> = (props) => {
 
+
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
