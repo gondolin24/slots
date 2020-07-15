@@ -1,11 +1,11 @@
-import {IonButton, IonItem, IonLabel, IonList, IonModal} from "@ionic/react";
+import {IonButton, IonContent, IonItem, IonLabel, IonList, IonLoading, IonModal, IonPopover} from "@ionic/react";
 import * as React from "react";
 import BadgeLabel from "./modal/BadgeLabel";
-import {getMultiplier, getWinningAmount, isJackPot} from "./CalculationEngine";
-import {useEffect, useRef} from "react";
+import {getMultiplier, getWinningAmount, isJackPot, specialCoinEarned} from "./CalculationEngine";
+import {useEffect, useRef, useState} from "react";
 import {Plugins} from '@capacitor/core';
 import Lottieplayer from "./LottiePlayer";
-import {jackPotLottie, losingImage, winningImage} from "./lottie/LottieFactory";
+import {jackPotLottie, losingImage, specialCoinLottie, winningImage} from "./lottie/LottieFactory";
 import {MAX_BET} from "../SlotConfig";
 
 const {Storage} = Plugins;
@@ -46,6 +46,16 @@ function Win() {
     )
 }
 
+function JackPotLottie() {
+    const {src, animationDefault, className} = jackPotLottie()
+    return (
+        <div className={className}>
+            <Lottieplayer source={src} animationDefault={animationDefault}/>
+        </div>
+    )
+
+}
+
 function SpinResult(win: boolean) {
     if (win) return Win()
     return Lost()
@@ -54,11 +64,17 @@ function SpinResult(win: boolean) {
 
 const ModalResult: React.FC<ModelProps> = (props) => {
 
-
+    const [showPopover, setShowPopover] = useState(false);
+    const saveData = async (data: any) => {
+        await Storage.set({
+            key: 'metaData',
+            value: JSON.stringify(data)
+        })
+    }
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
-            const jackPot: boolean = isJackPot()
+            const jackPot = isJackPot()
             const multiplier = getMultiplier(0, jackPot)
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
             const multiplierLabel = `${multiplier.toFixed(2)} X`
@@ -69,7 +85,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             ) : (
                 <BadgeLabel label={'Total Winnings'} labelValue={` - ${props.betAmount}`} color={'danger'}/>
             )
-            const spinResults = (jackPot) ? jackPotLottie() : SpinResult(props.didWin)
+            const spinResults = (jackPot) ? JackPotLottie() : SpinResult(props.didWin)
             const data = {
                 bankLabel,
                 totalWinningsLabel,
@@ -83,7 +99,6 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             props.setSetMetaData(props.metaData)
 
             if (newBalance < props.metaData.bankBalance) {
-                console.log('here')
                 props.setBetAmount(props.metaData.bankBalance)
             } else {
                 props.setBetAmount(oldBet)
@@ -95,13 +110,9 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 props.setBetAmount(MAX_BET)
                 props.setSliderMax(MAX_BET)
             }
-            Storage.set({
-                key: 'metaData',
-                value: JSON.stringify(json)
-            }).then(() => {
-            }).catch(() => {
-            })
+            saveData(json).then().catch()
 
+            setShowPopover(specialCoinEarned())
         }
     })
 
@@ -111,10 +122,12 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             props.setShowModal(false)
         });
     });
+    const special = specialCoinLottie()
 
     return (
         <IonModal isOpen={props.showModal}>
-            {props.resultData.spinResults}
+
+            { !props.safety && props.resultData.spinResults}
 
             <IonList>
                 <IonItem>
@@ -127,6 +140,24 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             </IonList>
 
             <IonButton onClick={() => props.setShowModal(false)}>Thanks for playing</IonButton>
+
+            <IonPopover
+                isOpen={showPopover}
+                cssClass='my-custom-class'
+                onDidDismiss={e => {
+                    const newCoins = 1 + props.metaData.specialCoins
+                    props.metaData.specialCoins = newCoins
+                    const json = props.metaData.toJson()
+
+                    saveData(json).then().catch()
+
+                    setShowPopover(false)
+                }}
+            >
+                <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>
+                <p>Special coin earned</p>
+            </IonPopover>
+
         </IonModal>
     );
 };

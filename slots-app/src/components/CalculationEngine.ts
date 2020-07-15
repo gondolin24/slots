@@ -15,10 +15,17 @@ export function isJackPot(): boolean {
     const result2 = Math.floor(Math.random() * 5)
     const result3 = Math.floor(Math.random() * 5)
     const result4 = Math.floor(Math.random() * 5)
-    return result1 === result2 && result2 === result3 && result4 === result3;
+
+    return result1 === result2 && result2 === result3 && result3===result4;
 }
 
 export function didSpinWin() {
     const random = Math.floor(Math.random() * 100)
     return random < 60
+}
+
+export function specialCoinEarned() {
+    const result1 = Math.floor(Math.random() * 15)
+    const result2 = Math.floor(Math.random() * 15)
+    return (result2 === result1)
 }

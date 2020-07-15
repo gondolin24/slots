@@ -109,19 +109,6 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                 </IonRange>
             </IonItem>
 
-            {/*<IonLoading*/}
-            {/*    cssClass='my-custom-class'*/}
-            {/*    isOpen={showLoading}*/}
-            {/*    onDidDismiss={() => {*/}
-            {/*        setDidWin(didSpinWin())*/}
-            {/*        setShowModal(true)*/}
-            {/*        setShowLoading(false)*/}
-            {/*        setSafety(true)*/}
-            {/*    }}*/}
-            {/*    message={'Calculating Winnings'}*/}
-            {/*    duration={4000}*/}
-            {/*/>*/}
-
             <ModalResult setSliderMax={setChildSlider} setBetAmount={setChildBetAmount} resultData={resultData}
                          setResultData={setChildResultData}
                          safety={safety} setSafety={setChildSafety} betAmount={betAmount} setShowModal={setChildModal}
