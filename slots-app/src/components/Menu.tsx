@@ -66,7 +66,7 @@ const Menu: React.FC = () => {
         <IonList id="inbox-list">
           <IonListHeader>Slots</IonListHeader>
           <IonNote>Still in development</IonNote>
-          <IonNote>V 1.0.1</IonNote>
+          <IonNote>V 1.1.0</IonNote>
 
           {appPages.map((appPage, index) => {
             return (

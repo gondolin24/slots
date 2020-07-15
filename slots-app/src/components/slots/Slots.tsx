@@ -1,10 +1,11 @@
 import {IonButton, IonCard, IonContent, IonItem, IonLabel, IonLoading, IonModal, IonRange} from '@ionic/react';
 import React, {useState} from 'react';
-import {BetService} from "../../BetService";
+import {Vibration} from '@ionic-native/vibration';
 import Lottieplayer from "../LottiePlayer";
 import animatedData from '../../lottie-files/Standard.json'
 import ModalResult from "../ModalResult";
 import _ from "lodash";
+import {didSpinWin} from "../CalculationEngine";
 
 
 function Greeting() {
@@ -20,10 +21,8 @@ interface SlotsInterface {
 }
 
 const Slots: React.FC<SlotsInterface> = (props) => {
-    const betService = new BetService({})
     const {metaData} = props
-
-    const [betAmount, setBetAmount] = useState(0)
+    const [betAmount, setBetAmount] = useState(1)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 0
 
@@ -31,11 +30,14 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
     const [showLoading, setShowLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [derp, setDerp] = useState(false);
+
     const [safety, setSafety] = useState(false);
     const [resultData, setResultData] = useState({
         multiplierLabel: '',
         bankLabel: '',
-        totalWinningsLabel: (<div/>)
+        totalWinningsLabel: (<div/>),
+        spinResults: (<div/>)
     })
 
     setTimeout(() => {
@@ -70,38 +72,43 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
             <IonButton expand="full" color={"money"} disabled={buttonDisable}
                        onClick={(e) => {
+                           setSafety(true)
+
                            setShowModal(false)
-                           setShowLoading(true)
+                           setDidWin(didSpinWin())
+                           setShowModal(true)
+                               // @ts-ignore
+                           Vibration.vibrate(1000);
                        }}>BET</IonButton>
 
             <IonItem>
-                <IonRange min={0} max={metaData.bankBalance} color="money" pin={true}
+                <IonRange min={1} max={metaData.bankBalance} color="money" pin={true}
                           onIonChange={e => {
                               const value: number = _.get(e, 'detail.value', 0)
                               setBetAmount(value)
                           }}>
-                    <IonLabel slot="start">0</IonLabel>
+                    <IonLabel slot="start">1</IonLabel>
                     <IonLabel slot="end">{metaData.bankBalance}</IonLabel>
                 </IonRange>
             </IonItem>
 
-            <IonLoading
-                cssClass='my-custom-class'
-                isOpen={showLoading}
-                onDidDismiss={() => {
-                    setShowLoading(false)
-                    setDidWin(betService.getSpinResults)
-                    setShowModal(true)
-                    setSafety(true)
+            {/*<IonLoading*/}
+            {/*    cssClass='my-custom-class'*/}
+            {/*    isOpen={showLoading}*/}
+            {/*    onDidDismiss={() => {*/}
+            {/*        setDidWin(didSpinWin())*/}
+            {/*        setShowModal(true)*/}
+            {/*        setShowLoading(false)*/}
+            {/*        setSafety(true)*/}
+            {/*    }}*/}
+            {/*    message={'Calculating Winnings'}*/}
+            {/*    duration={4000}*/}
+            {/*/>*/}
 
-                }}
-                message={'Calculating Winnings'}
-                duration={3000}
-            />
-            <ModalResult setBetAmount={setChildBetAmount} resultData={resultData} setResultData={setChildResultData} safety={safety} setSafety={setChildSafety} betAmount={betAmount} setShowModal={setChildModal}
+            <ModalResult setBetAmount={setChildBetAmount} resultData={resultData} setResultData={setChildResultData}
+                         safety={safety} setSafety={setChildSafety} betAmount={betAmount} setShowModal={setChildModal}
                          showModal={showModal} didWin={didWin}
                          metaData={metaData} setSetMetaData={props.setMetaData}/>
-
 
         </IonContent>
     );

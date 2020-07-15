@@ -27,9 +27,6 @@ const Page: React.FC = () => {
             const parsed = JSON.parse(val)
             if ((_.get(parsed, 'metaData')) && (inital)) {
                 const json = _.get(parsed, 'metaData')
-                console.log('here')
-                console.log(json)
-
                 const metaData = AppMetaData.fromJson(json)
                 setAppMetaData(metaData)
                 setInitial(false)

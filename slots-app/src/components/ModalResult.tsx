@@ -1,11 +1,11 @@
 import {IonButton, IonItem, IonLabel, IonList, IonModal} from "@ionic/react";
 import * as React from "react";
 import BadgeLabel from "./modal/BadgeLabel";
-import {getMultiplier, getWinningAmount} from "./CalculationEngine";
+import {getMultiplier, getWinningAmount, isJackPot} from "./CalculationEngine";
 import {useEffect, useRef} from "react";
 import {Plugins} from '@capacitor/core';
 import Lottieplayer from "./LottiePlayer";
-import {losingImage, winningImage} from "./lottie/LottieFactory";
+import {jackPotLottie, losingImage, winningImage} from "./lottie/LottieFactory";
 
 const {Storage} = Plugins;
 
@@ -51,12 +51,11 @@ function SpinResult(win: boolean) {
 
 const ModalResult: React.FC<ModelProps> = (props) => {
 
-
     useEffect(() => {
         if (props.safety) {
-
             props.setSafety(false)
-            const multiplier = getMultiplier(0)
+            const jackPot: boolean = isJackPot()
+            const multiplier = getMultiplier(0, jackPot)
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
             const multiplierLabel = `${multiplier.toFixed(2)} X`
             const newBalance = (props.didWin) ? (props.metaData.bankBalance + winLostAmount) : (props.metaData.bankBalance - props.betAmount)
@@ -66,13 +65,14 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             ) : (
                 <BadgeLabel label={'Total Winnings'} labelValue={` - ${props.betAmount}`} color={'danger'}/>
             )
-
+            const spinResults = (jackPot) ? jackPotLottie() : SpinResult(props.didWin)
             const data = {
                 bankLabel,
                 totalWinningsLabel,
-                multiplierLabel
+                multiplierLabel,
+                spinResults
             }
-
+            console.log('here')
             props.setResultData(data)
             props.metaData.bankBalance = (newBalance < 5) ? 6 : newBalance
             const json = props.metaData.toJson()
@@ -85,9 +85,9 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 key: 'metaData',
                 value: JSON.stringify(json)
             }).then(() => {
-                console.log(json)
             }).catch(() => {
             })
+
         }
     })
 
@@ -100,7 +100,8 @@ const ModalResult: React.FC<ModelProps> = (props) => {
 
     return (
         <IonModal isOpen={props.showModal}>
-            {SpinResult(props.didWin)}
+            {props.resultData.spinResults}
+
             <IonList>
                 <IonItem>
                     <IonLabel>Results</IonLabel>

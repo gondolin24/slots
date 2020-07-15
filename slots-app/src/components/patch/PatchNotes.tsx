@@ -19,6 +19,32 @@ const PathNotes: React.FC = () => {
 <IonContent>
     <IonItem lines="none">
         <IonLabel>
+            Release 1.1.0
+        </IonLabel>
+    </IonItem>
+    <IonItem lines={"none"}>
+        <IonLabel className="ion-text-wrap">
+            Added JackPot
+        </IonLabel>
+    </IonItem>
+    <IonItem lines={"none"} >
+        <IonLabel className="ion-text-wrap">
+            Removed loading when placing bet
+        </IonLabel>
+    </IonItem>
+    <IonItem lines={"none"} >
+        <IonLabel className="ion-text-wrap">
+            win rate increased 55% -> 60%
+        </IonLabel>
+    </IonItem>
+    <IonItem >
+        <IonLabel className="ion-text-wrap">
+            0+(random())*.65 to random*.75 + random*2
+        </IonLabel>
+    </IonItem>
+
+    <IonItem lines="none">
+        <IonLabel>
             Release 1.0.1
         </IonLabel>
     </IonItem>
