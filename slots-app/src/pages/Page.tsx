@@ -9,6 +9,7 @@ import {AppMetaData} from "../models/AppMetaData";
 import _ from "lodash";
 
 import {Plugins} from '@capacitor/core';
+import PathNotes from "../components/patch/PatchNotes";
 
 const {Storage} = Plugins
 
@@ -17,7 +18,7 @@ const Page: React.FC = () => {
 
     const {name} = useParams<{ name: string; }>();
     let page = null
-    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000));
+    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0));
     const [inital, setInitial] = useState(true);
 
     useEffect(() => {
@@ -26,6 +27,9 @@ const Page: React.FC = () => {
             const parsed = JSON.parse(val)
             if ((_.get(parsed, 'metaData')) && (inital)) {
                 const json = _.get(parsed, 'metaData')
+                console.log('here')
+                console.log(json)
+
                 const metaData = AppMetaData.fromJson(json)
                 setAppMetaData(metaData)
                 setInitial(false)
@@ -44,8 +48,11 @@ const Page: React.FC = () => {
         case 'Slots' :
             page = <Slots metaData={appMetaData} setMetaData={setChildMetaData}/>
             break
-        case 'tt':
+        case 'Bank':
             page = <Bank/>
+            break
+        case 'ChangeList':
+            page = <PathNotes/>
             break
         default :
             page = <DefaultPage/>

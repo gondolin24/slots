@@ -13,6 +13,7 @@ import {
 import React from 'react';
 import {useLocation} from 'react-router-dom';
 import {
+  cafeOutline, cafeSharp,
   cardOutline,
   cardSharp,
   gameControllerOutline,
@@ -47,6 +48,12 @@ const appPages: AppPage[] = [
     url: '/page/Rewards',
     iosIcon: glassesOutline,
     mdIcon: glassesSharp
+  },
+  {
+    title: 'Patch Notes',
+    url: '/page/ChangeList',
+    iosIcon: cafeOutline,
+    mdIcon: cafeSharp
   }
 ];
 
@@ -59,6 +66,8 @@ const Menu: React.FC = () => {
         <IonList id="inbox-list">
           <IonListHeader>Slots</IonListHeader>
           <IonNote>Still in development</IonNote>
+          <IonNote>V 1.0.1</IonNote>
+
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>

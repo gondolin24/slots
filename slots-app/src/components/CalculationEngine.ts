@@ -1,6 +1,6 @@
 export function getMultiplier(bump: number) {
-    const randomNum = (Math.random() + 1)
-    return randomNum + bump
+    const randomNum = (Math.random()) * .65
+    return randomNum
 }
 
 export function getWinningAmount(winCondition: boolean, multiplier: number, betAmount: number) {

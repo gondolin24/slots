@@ -23,14 +23,20 @@ const Slots: React.FC<SlotsInterface> = (props) => {
     const betService = new BetService({})
     const {metaData} = props
 
-    const [betAmount, setBetAmount] = useState(25)
+    const [betAmount, setBetAmount] = useState(0)
     const [didWin, setDidWin] = useState(true)
-    const initialDisable = metaData.bankBalance < 25
+    const initialDisable = metaData.bankBalance < 0
 
     const [buttonDisable, setButtonDisable] = useState(initialDisable)
 
     const [showLoading, setShowLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [safety, setSafety] = useState(false);
+    const [resultData, setResultData] = useState({
+        multiplierLabel: '',
+        bankLabel: '',
+        totalWinningsLabel: (<div/>)
+    })
 
     setTimeout(() => {
         setShowLoading(false);
@@ -38,6 +44,15 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
     const setChildModal = (val: boolean) => {
         setShowModal(val)
+    }
+    const setChildSafety = (val: boolean) => {
+        setSafety(val)
+    }
+    const setChildResultData = (val: any) => {
+        setResultData(val)
+    }
+    const setChildBetAmount = (val: any) => {
+        setBetAmount(val)
     }
 
     return (
@@ -54,7 +69,8 @@ const Slots: React.FC<SlotsInterface> = (props) => {
             </IonCard>
 
             <IonButton expand="full" color={"money"} disabled={buttonDisable}
-                       onClick={() => {
+                       onClick={(e) => {
+                           setShowModal(false)
                            setShowLoading(true)
                        }}>BET</IonButton>
 
@@ -64,7 +80,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                               const value: number = _.get(e, 'detail.value', 0)
                               setBetAmount(value)
                           }}>
-                    <IonLabel slot="start">25</IonLabel>
+                    <IonLabel slot="start">0</IonLabel>
                     <IonLabel slot="end">{metaData.bankBalance}</IonLabel>
                 </IonRange>
             </IonItem>
@@ -76,12 +92,17 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                     setShowLoading(false)
                     setDidWin(betService.getSpinResults)
                     setShowModal(true)
+                    setSafety(true)
+
                 }}
                 message={'Calculating Winnings'}
-                duration={4000}
+                duration={3000}
             />
-            <ModalResult betAmount={betAmount} setShowModal={setChildModal} showModal={showModal} didWin={didWin}
+            <ModalResult setBetAmount={setChildBetAmount} resultData={resultData} setResultData={setChildResultData} safety={safety} setSafety={setChildSafety} betAmount={betAmount} setShowModal={setChildModal}
+                         showModal={showModal} didWin={didWin}
                          metaData={metaData} setSetMetaData={props.setMetaData}/>
+
+
         </IonContent>
     );
 };
