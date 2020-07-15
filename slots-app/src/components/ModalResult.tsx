@@ -6,6 +6,7 @@ import {useEffect, useRef} from "react";
 import {Plugins} from '@capacitor/core';
 import Lottieplayer from "./LottiePlayer";
 import {jackPotLottie, losingImage, winningImage} from "./lottie/LottieFactory";
+import {MAX_BET} from "../SlotConfig";
 
 const {Storage} = Plugins;
 
@@ -21,6 +22,8 @@ interface ModelProps {
     resultData: any
     setResultData: (val: any) => void
     setBetAmount: (val: any) => void
+    setSliderMax: (val: any) => void
+
 }
 
 
@@ -72,14 +75,24 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 multiplierLabel,
                 spinResults
             }
-            console.log('here')
             props.setResultData(data)
             props.metaData.bankBalance = (newBalance < 5) ? 6 : newBalance
+            const oldBet = props.betAmount
             const json = props.metaData.toJson()
             props.setSetMetaData(props.metaData)
 
             if (newBalance < props.metaData.bankBalance) {
+                console.log('here')
                 props.setBetAmount(props.metaData.bankBalance)
+            } else {
+                props.setBetAmount(oldBet)
+            }
+
+            if (newBalance < MAX_BET) {
+                props.setSliderMax(newBalance)
+            } else {
+                props.setBetAmount(MAX_BET)
+                props.setSliderMax(MAX_BET)
             }
             Storage.set({
                 key: 'metaData',
@@ -113,7 +126,6 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             </IonList>
 
             <IonButton onClick={() => props.setShowModal(false)}>Thanks for playing</IonButton>
-
         </IonModal>
     );
 };

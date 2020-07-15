@@ -1,11 +1,12 @@
 import {IonButton, IonCard, IonContent, IonItem, IonLabel, IonLoading, IonModal, IonRange} from '@ionic/react';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Vibration} from '@ionic-native/vibration';
 import Lottieplayer from "../LottiePlayer";
 import animatedData from '../../lottie-files/Standard.json'
 import ModalResult from "../ModalResult";
 import _ from "lodash";
 import {didSpinWin} from "../CalculationEngine";
+import {MAX_BET} from "../../SlotConfig";
 
 
 function Greeting() {
@@ -22,6 +23,7 @@ interface SlotsInterface {
 
 const Slots: React.FC<SlotsInterface> = (props) => {
     const {metaData} = props
+    // console.log(initialSlider)
     const [betAmount, setBetAmount] = useState(1)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 0
@@ -30,7 +32,16 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
     const [showLoading, setShowLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [derp, setDerp] = useState(false);
+    const [sliderRange, setSliderRange] = useState(metaData.bankBalance);
+
+    useEffect(() => {
+        if (metaData.bankBalance < MAX_BET) {
+            setSliderRange(metaData.bankBalance)
+        } else {
+            setSliderRange(MAX_BET)
+        }
+
+    })
 
     const [safety, setSafety] = useState(false);
     const [resultData, setResultData] = useState({
@@ -56,16 +67,24 @@ const Slots: React.FC<SlotsInterface> = (props) => {
     const setChildBetAmount = (val: any) => {
         setBetAmount(val)
     }
+    const setChildSlider = (val: any) => {
+        setSliderRange(val)
+    }
 
     return (
         <IonContent>
+            {/*<IonItem>*/}
+            {/*    <IonLabel color={"dark"}>*/}
+            {/*        Bet Amount*/}
+            {/*    </IonLabel>*/}
+            {/*    <IonLabel>{betAmount}</IonLabel>*/}
+            {/*</IonItem>*/}
             <IonItem>
                 <IonLabel color={"dark"}>
-                    Bet Amount
+                    Bank Balance
                 </IonLabel>
-                <IonLabel>{betAmount}</IonLabel>
+                <IonLabel>{metaData.bankBalance}</IonLabel>
             </IonItem>
-
             <IonCard>
                 {Greeting()}
             </IonCard>
@@ -73,22 +92,20 @@ const Slots: React.FC<SlotsInterface> = (props) => {
             <IonButton expand="full" color={"money"} disabled={buttonDisable}
                        onClick={(e) => {
                            setSafety(true)
-
-                           setShowModal(false)
                            setDidWin(didSpinWin())
                            setShowModal(true)
-                               // @ts-ignore
-                           Vibration.vibrate(1000);
-                       }}>BET</IonButton>
+                           // @ts-ignore
+                           Vibration.vibrate(500);
+                       }}>BET {betAmount}</IonButton>
 
             <IonItem>
-                <IonRange min={1} max={metaData.bankBalance} color="money" pin={true}
+                <IonRange min={1} max={sliderRange} color="money" pin={true}
                           onIonChange={e => {
                               const value: number = _.get(e, 'detail.value', 0)
                               setBetAmount(value)
                           }}>
                     <IonLabel slot="start">1</IonLabel>
-                    <IonLabel slot="end">{metaData.bankBalance}</IonLabel>
+                    <IonLabel slot="end">{sliderRange}</IonLabel>
                 </IonRange>
             </IonItem>
 
@@ -105,7 +122,8 @@ const Slots: React.FC<SlotsInterface> = (props) => {
             {/*    duration={4000}*/}
             {/*/>*/}
 
-            <ModalResult setBetAmount={setChildBetAmount} resultData={resultData} setResultData={setChildResultData}
+            <ModalResult setSliderMax={setChildSlider} setBetAmount={setChildBetAmount} resultData={resultData}
+                         setResultData={setChildResultData}
                          safety={safety} setSafety={setChildSafety} betAmount={betAmount} setShowModal={setChildModal}
                          showModal={showModal} didWin={didWin}
                          metaData={metaData} setSetMetaData={props.setMetaData}/>

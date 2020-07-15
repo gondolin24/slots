@@ -22,6 +22,7 @@ import {
   glassesSharp
 } from 'ionicons/icons';
 import './Menu.css';
+import {CURRENT_PATCH} from "../SlotConfig";
 
 interface AppPage {
   url: string;
@@ -66,7 +67,7 @@ const Menu: React.FC = () => {
         <IonList id="inbox-list">
           <IonListHeader>Slots</IonListHeader>
           <IonNote>Still in development</IonNote>
-          <IonNote>V 1.1.0</IonNote>
+          <IonNote>V {CURRENT_PATCH}</IonNote>
 
           {appPages.map((appPage, index) => {
             return (

@@ -1,10 +1,36 @@
 import React from "react";
-import {IonButtons, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+import {IonAvatar, IonBadge, IonContent, IonItem, IonLabel} from "@ionic/react";
 
-const Bank: React.FC = () => {
+import * as lemon from '../../image/lemon.png'
+
+
+interface BankProps {
+    metaData: any
+}
+
+const Bank: React.FC<BankProps> = (props) => {
 
     return (
-                    <IonTitle> No clue</IonTitle>
+        <IonContent>
+            <IonItem>
+                <IonAvatar slot={'start'}>
+                    <img src={'https://emoji.gg/assets/emoji/6751_Lemon_cringe_zoom.png'}/>
+                </IonAvatar> <IonLabel>Coin Amount</IonLabel>
+                <IonBadge color={'dark'} slot="end">{props.metaData.bankBalance}</IonBadge>
+            </IonItem>
+            <IonItem>
+                <IonAvatar slot={'start'}>
+                    <img src="https://emoji.gg/assets/emoji/6312_poohdance.gif"/>
+                </IonAvatar> <IonLabel>Special Coins</IonLabel>
+                <IonBadge color={'dark'} slot="end">0</IonBadge>
+            </IonItem>
+            <IonItem>
+                <IonAvatar slot={'start'}>
+                    <img src="https://emoji.gg/assets/emoji/2271_ArabDance.gif"/>
+                </IonAvatar> <IonLabel>Multiplier Bonus</IonLabel>
+                <IonBadge color={'dark'} slot="end">{props.metaData.rewardMultiplier}</IonBadge>
+            </IonItem>
+        </IonContent>
     );
 };
 export default Bank;

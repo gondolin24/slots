@@ -10,6 +10,7 @@ import _ from "lodash";
 
 import {Plugins} from '@capacitor/core';
 import PathNotes from "../components/patch/PatchNotes";
+import Rewards from "../components/rewards/Rewards";
 
 const {Storage} = Plugins
 
@@ -46,10 +47,13 @@ const Page: React.FC = () => {
             page = <Slots metaData={appMetaData} setMetaData={setChildMetaData}/>
             break
         case 'Bank':
-            page = <Bank/>
+            page = <Bank metaData={appMetaData}/>
             break
         case 'ChangeList':
             page = <PathNotes/>
+            break
+        case 'Rewards':
+           page = <Rewards/>
             break
         default :
             page = <DefaultPage/>

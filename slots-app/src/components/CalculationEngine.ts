@@ -15,9 +15,7 @@ export function isJackPot(): boolean {
     const result2 = Math.floor(Math.random() * 5)
     const result3 = Math.floor(Math.random() * 5)
     const result4 = Math.floor(Math.random() * 5)
-
     return result1 === result2 && result2 === result3 && result4 === result3;
-
 }
 
 export function didSpinWin() {
