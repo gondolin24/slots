@@ -107,7 +107,6 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             if (newBalance < MAX_BET) {
                 props.setSliderMax(newBalance)
             } else {
-                props.setBetAmount(MAX_BET)
                 props.setSliderMax(MAX_BET)
             }
             saveData(json).then().catch()
