@@ -28,7 +28,7 @@ const Rewards: React.FC = () => {
                         on-top the default multiplier</p>
                     <IonItem>
                         <IonLabel className={'center-align-label'}>
-                            2 special coins
+                            20 special coins
                         </IonLabel>
                     </IonItem>
                     <IonItem>
@@ -38,6 +38,24 @@ const Rewards: React.FC = () => {
                     </IonItem>
                     <IonButton fill="clear">Can't Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
                 </IonSlide>
+
+
+                <IonSlide>
+                    <h2>Win Chance</h2>
+                    <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>
+                    <IonItem>
+                        <IonLabel className={'center-align-label'}>
+                            20 special coins
+                        </IonLabel>
+                    </IonItem>
+                    <IonItem>
+                        <IonLabel className={'center-align-label'}>
+                            Permanent + 3% change of winning
+                        </IonLabel>
+                    </IonItem>
+                    <IonButton fill="clear">Can't Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
+                </IonSlide>
+
 
             </IonSlides>
         </IonContent>
