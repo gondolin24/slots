@@ -11,15 +11,25 @@ import _ from "lodash";
 import {Plugins} from '@capacitor/core';
 import PathNotes from "../components/patch/PatchNotes";
 import Rewards from "../components/rewards/Rewards";
+import SettingsPage from "../components/settings/SettingsPage";
+import {SettingsData} from "../models/SettingsData";
 
 const {Storage} = Plugins
 
+
+function nameMap(){
+    return {
+        'SettingsPage':{
+            name: 'Settings'
+        }
+    }
+}
 
 const Page: React.FC = () => {
 
     const {name} = useParams<{ name: string; }>();
     let page = null
-    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0));
+    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0, new SettingsData(true)));
     const [inital, setInitial] = useState(true);
 
     useEffect(() => {
@@ -33,7 +43,6 @@ const Page: React.FC = () => {
                 setInitial(false)
             }
         }).catch(() => {
-
         })
     })
 
@@ -41,21 +50,30 @@ const Page: React.FC = () => {
         setAppMetaData(val)
     }
 
-
+    let headerName = ''
     switch (name) {
         case 'Slots' :
+            headerName = 'Slots'
             page = <Slots metaData={appMetaData} setMetaData={setChildMetaData}/>
             break
         case 'Bank':
+            headerName = 'Bank'
             page = <Bank metaData={appMetaData}/>
             break
         case 'ChangeList':
+            headerName = 'Patch Notes'
             page = <PathNotes/>
             break
         case 'Rewards':
+            headerName = 'Shop Rewards'
             page = <Rewards/>
             break
+        case 'SettingsPage':
+            headerName = 'Settings'
+            page = <SettingsPage metaData={appMetaData} setSetMetaData={setChildMetaData}/>
+            break
         default :
+            headerName = ''
             page = <DefaultPage/>
     }
 
@@ -66,7 +84,7 @@ const Page: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton/>
                     </IonButtons>
-                    <IonTitle>{name}</IonTitle>
+                    <IonTitle>{headerName}</IonTitle>
                 </IonToolbar>
             </IonHeader>
 

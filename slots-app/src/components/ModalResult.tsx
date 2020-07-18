@@ -79,13 +79,14 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
             const multiplierLabel = `${multiplier.toFixed(2)} X`
             const newBalance = (props.didWin) ? (props.metaData.bankBalance + winLostAmount) : (props.metaData.bankBalance - props.betAmount)
-            const bankLabel = ((newBalance < 5) ? 6 : newBalance).toString()
+            const bankLabel = ((newBalance < 0) ? 0 : newBalance).toString()
             const totalWinningsLabel = (props.didWin) ? (
                 <BadgeLabel label={'Total Winnings'} labelValue={winLostAmount.toString()} color={'warning'}/>
             ) : (
                 <BadgeLabel label={'Total Winnings'} labelValue={` - ${props.betAmount}`} color={'danger'}/>
             )
-            const spinResults = (jackPot) ? JackPotLottie() : SpinResult(props.didWin)
+
+            const spinResults = (jackPot && props.didWin) ? JackPotLottie() : SpinResult(props.didWin)
             const data = {
                 bankLabel,
                 totalWinningsLabel,

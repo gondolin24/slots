@@ -1,22 +1,37 @@
 import React from "react";
-import {
-    IonAvatar, IonButton,
-    IonButtons, IonCheckbox,
-    IonContent, IonDatetime,
-    IonHeader, IonIcon, IonInput,
-    IonItem, IonLabel, IonList,
-    IonMenu,
-    IonMenuButton,
-    IonPage, IonRange, IonSelect, IonSelectOption, IonText, IonThumbnail,
-    IonTitle, IonToggle,
-    IonToolbar
-} from "@ionic/react";
-import {checkmarkCircle, closeCircle, home, informationCircle, navigate, shuffle, star} from "ionicons/icons";
+import {IonContent, IonItem, IonLabel} from "@ionic/react";
 
 const PathNotes: React.FC = () => {
 
     return (
         <IonContent>
+            <IonItem lines="none">
+                <IonLabel>
+                    Release 1.2.0
+                </IonLabel>
+            </IonItem>
+            <IonItem lines={"none"}>
+                <IonLabel className="ion-text-wrap">
+                    Minor Bug fixes
+                </IonLabel>
+            </IonItem>
+
+            <IonItem lines={"none"}>
+                <IonLabel className="ion-text-wrap">
+                    Settings vibration Toggle
+                </IonLabel>
+            </IonItem>
+            <IonItem lines={"none"}>
+                <IonLabel className="ion-text-wrap">
+                   win change decreased
+                </IonLabel>
+            </IonItem>
+
+            <IonItem lines={"none"}>
+                <IonLabel className="ion-text-wrap">
+                    min bet of 50
+                </IonLabel>
+            </IonItem>
 
 
             <IonItem lines="none">

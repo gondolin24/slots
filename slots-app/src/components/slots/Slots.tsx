@@ -89,13 +89,15 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                 {Greeting()}
             </IonCard>
 
-            <IonButton expand="full" color={"money"} disabled={buttonDisable}
+            <IonButton expand="full" color={"money"} disabled={(betAmount < 50)}
                        onClick={(e) => {
                            setSafety(true)
                            setDidWin(didSpinWin())
                            setShowModal(true)
                            // @ts-ignore
-                           Vibration.vibrate(500);
+                          if(metaData.settingsData.vibration){
+                              Vibration.vibrate(500);
+                          }
                        }}>BET {betAmount}</IonButton>
 
             <IonItem>

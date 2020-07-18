@@ -1,20 +1,25 @@
+import {SettingsData} from "./SettingsData";
+
 export class AppMetaData {
     bankBalance: number
     rewardMultiplier: number
     specialCoins: number
+    settingsData: SettingsData
 
-    constructor(bankBalance: number, rewardMultiplier: number, specialCoins: number) {
+    constructor(bankBalance: number, rewardMultiplier: number, specialCoins: number, settingsData: SettingsData) {
         this.bankBalance = bankBalance
         this.specialCoins = specialCoins
         this.rewardMultiplier = rewardMultiplier
+        this.settingsData = settingsData
     }
 
     toJson() {
         return {
             metaData: {
-                specialCoins : this.specialCoins,
+                specialCoins: this.specialCoins,
                 bankBalance: this.bankBalance,
-                rewardMultiplier: this.rewardMultiplier
+                rewardMultiplier: this.rewardMultiplier,
+                settingsData: this.settingsData.toJson()
             }
         }
     }
@@ -23,6 +28,7 @@ export class AppMetaData {
         const bankBalance = schema.bankBalance
         const rewardMultiplier = schema.rewardMultiplier || 0
         const specialCoins = schema.specialCoins || 0
-        return new AppMetaData(bankBalance, rewardMultiplier,specialCoins)
+        const settingsData = SettingsData.fromJson(schema.settingsData)
+        return new AppMetaData(bankBalance, rewardMultiplier, specialCoins, settingsData)
     }
 }
