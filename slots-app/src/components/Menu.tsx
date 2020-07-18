@@ -19,7 +19,7 @@ import {
   gameControllerOutline,
   gameControllerSharp,
   glassesOutline,
-  glassesSharp
+  glassesSharp, hammerOutline, hammerSharp
 } from 'ionicons/icons';
 import './Menu.css';
 import {CURRENT_PATCH} from "../SlotConfig";
@@ -49,6 +49,12 @@ const appPages: AppPage[] = [
     url: '/page/Rewards',
     iosIcon: glassesOutline,
     mdIcon: glassesSharp
+  },
+  {
+    title: 'Settings',
+    url: '/page/Settings',
+    iosIcon: hammerOutline,
+    mdIcon: hammerSharp
   },
   {
     title: 'Patch Notes',
