@@ -16,12 +16,12 @@ export function isJackPot(): boolean {
     const result3 = Math.floor(Math.random() * 5)
     const result4 = Math.floor(Math.random() * 5)
 
-    return result1 === result2 && result2 === result3 && result3===result4;
+    return result1 === result2 && result2 === result3 && result3 === result4;
 }
 
 export function didSpinWin() {
     const random = Math.floor(Math.random() * 100)
-    return false
+    return random <= 40
 }
 
 export function specialCoinEarned() {

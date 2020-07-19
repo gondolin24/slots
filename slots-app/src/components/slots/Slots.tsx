@@ -93,19 +93,6 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                            }
                        }}>BET {betAmount}</IonButton>
 
-
-            {/*    {(metaData.bankBalance < 25)}{*/}
-            {/*    <IonItem>*/}
-            {/*        <IonRange min={25} max={sliderRange} color="money" pin={true}*/}
-            {/*                  onIonChange={e => {*/}
-            {/*                      const value: number = _.get(e, 'detail.value', 0)*/}
-            {/*                      setBetAmount(value)*/}
-            {/*                  }}>*/}
-            {/*            <IonLabel slot="start">25</IonLabel>*/}
-            {/*            <IonLabel slot="end">{sliderRange}</IonLabel>*/}
-            {/*        </IonRange>*/}
-            {/*    </IonItem>*/}
-            {/*}*/}
             {(metaData.bankBalance >= 25) &&
             <IonItem>
                 <IonRange min={25} max={sliderRange} color="money" pin={true}
