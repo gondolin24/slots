@@ -1,14 +1,12 @@
-import {IonButton, IonContent, IonItem, IonLabel, IonList, IonLoading, IonModal, IonPopover} from "@ionic/react";
+import {IonButton, IonItem, IonLabel, IonList, IonModal, IonPopover} from "@ionic/react";
 import * as React from "react";
+import {useEffect, useState} from "react";
 import BadgeLabel from "./modal/BadgeLabel";
 import {getMultiplier, getWinningAmount, isJackPot, specialCoinEarned} from "./CalculationEngine";
-import {useEffect, useRef, useState} from "react";
-import {Plugins} from '@capacitor/core';
 import Lottieplayer from "./LottiePlayer";
 import {jackPotLottie, losingImage, specialCoinLottie, winningImage} from "./lottie/LottieFactory";
 import {MAX_BET} from "../SlotConfig";
 
-const {Storage} = Plugins;
 
 interface ModelProps {
     setShowModal: (val: boolean) => void
@@ -65,12 +63,6 @@ function SpinResult(win: boolean) {
 const ModalResult: React.FC<ModelProps> = (props) => {
 
     const [showPopover, setShowPopover] = useState(false);
-    const saveData = async (data: any) => {
-        await Storage.set({
-            key: 'metaData',
-            value: JSON.stringify(data)
-        })
-    }
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
@@ -94,12 +86,12 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 spinResults
             }
             props.setResultData(data)
-            props.metaData.bankBalance = (newBalance < 5) ? 6 : newBalance
+            const oldBalance = props.metaData.bankBalance
+            props.metaData.bankBalance = (newBalance < 0) ? 0 : newBalance
             const oldBet = props.betAmount
-            const json = props.metaData.toJson()
             props.setSetMetaData(props.metaData)
 
-            if (newBalance < props.metaData.bankBalance) {
+            if (newBalance < oldBalance) {
                 props.setBetAmount(props.metaData.bankBalance)
             } else {
                 props.setBetAmount(oldBet)
@@ -110,7 +102,6 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             } else {
                 props.setSliderMax(MAX_BET)
             }
-            saveData(json).then().catch()
 
             setShowPopover(specialCoinEarned())
         }
@@ -127,7 +118,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
     return (
         <IonModal isOpen={props.showModal}>
 
-            { !props.safety && props.resultData.spinResults}
+            {!props.safety && props.resultData.spinResults}
 
             <IonList>
                 <IonItem>
@@ -147,10 +138,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 onDidDismiss={e => {
                     const newCoins = 1 + props.metaData.specialCoins
                     props.metaData.specialCoins = newCoins
-                    const json = props.metaData.toJson()
-
-                    saveData(json).then().catch()
-
+                    props.setSetMetaData(props.metaData)
                     setShowPopover(false)
                 }}
             >

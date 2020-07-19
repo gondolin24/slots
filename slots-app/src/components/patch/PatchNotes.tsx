@@ -26,13 +26,11 @@ const PathNotes: React.FC = () => {
                    Win change decreased
                 </IonLabel>
             </IonItem>
-
             <IonItem>
                 <IonLabel className="ion-text-wrap">
-                    Min bet of 50
+                    Min bet of 25
                 </IonLabel>
             </IonItem>
-
 
             <IonItem lines="none">
                 <IonLabel>

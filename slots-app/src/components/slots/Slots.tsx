@@ -23,8 +23,7 @@ interface SlotsInterface {
 
 const Slots: React.FC<SlotsInterface> = (props) => {
     const {metaData} = props
-    // console.log(initialSlider)
-    const [betAmount, setBetAmount] = useState(1)
+    const [betAmount, setBetAmount] = useState(25)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 0
 
@@ -73,12 +72,6 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
     return (
         <IonContent>
-            {/*<IonItem>*/}
-            {/*    <IonLabel color={"dark"}>*/}
-            {/*        Bet Amount*/}
-            {/*    </IonLabel>*/}
-            {/*    <IonLabel>{betAmount}</IonLabel>*/}
-            {/*</IonItem>*/}
             <IonItem>
                 <IonLabel color={"dark"}>
                     Bank Balance
@@ -89,27 +82,43 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                 {Greeting()}
             </IonCard>
 
-            <IonButton expand="full" color={"money"} disabled={(betAmount < 50)}
+            <IonButton expand="full" color={"money"} disabled={(metaData.bankBalance < 0)}
                        onClick={(e) => {
                            setSafety(true)
                            setDidWin(didSpinWin())
                            setShowModal(true)
                            // @ts-ignore
-                          if(metaData.settingsData.vibration){
-                              Vibration.vibrate(500);
-                          }
+                           if (metaData.settingsData.vibration) {
+                               Vibration.vibrate(500);
+                           }
                        }}>BET {betAmount}</IonButton>
 
+
+            {/*    {(metaData.bankBalance < 25)}{*/}
+            {/*    <IonItem>*/}
+            {/*        <IonRange min={25} max={sliderRange} color="money" pin={true}*/}
+            {/*                  onIonChange={e => {*/}
+            {/*                      const value: number = _.get(e, 'detail.value', 0)*/}
+            {/*                      setBetAmount(value)*/}
+            {/*                  }}>*/}
+            {/*            <IonLabel slot="start">25</IonLabel>*/}
+            {/*            <IonLabel slot="end">{sliderRange}</IonLabel>*/}
+            {/*        </IonRange>*/}
+            {/*    </IonItem>*/}
+            {/*}*/}
+            {(metaData.bankBalance >= 0) &&
             <IonItem>
-                <IonRange min={1} max={sliderRange} color="money" pin={true}
+                <IonRange min={25} max={sliderRange} color="money" pin={true}
                           onIonChange={e => {
                               const value: number = _.get(e, 'detail.value', 0)
                               setBetAmount(value)
                           }}>
-                    <IonLabel slot="start">1</IonLabel>
+                    <IonLabel slot="start">25</IonLabel>
                     <IonLabel slot="end">{sliderRange}</IonLabel>
                 </IonRange>
             </IonItem>
+            }
+
 
             <ModalResult setSliderMax={setChildSlider} setBetAmount={setChildBetAmount} resultData={resultData}
                          setResultData={setChildResultData}

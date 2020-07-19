@@ -17,9 +17,9 @@ import {SettingsData} from "../models/SettingsData";
 const {Storage} = Plugins
 
 
-function nameMap(){
+function nameMap() {
     return {
-        'SettingsPage':{
+        'SettingsPage': {
             name: 'Settings'
         }
     }
@@ -44,10 +44,19 @@ const Page: React.FC = () => {
             }
         }).catch(() => {
         })
-    })
+    }, [inital])
+
+    const saveData = async (data: any) => {
+        await Storage.set({
+            key: 'metaData',
+            value: JSON.stringify(data)
+        })
+    }
 
     const setChildMetaData = (val: any) => {
         setAppMetaData(val)
+        const json = appMetaData.toJson()
+        saveData(json).then().catch()
     }
 
     let headerName = ''

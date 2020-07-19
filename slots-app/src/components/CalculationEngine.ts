@@ -21,7 +21,7 @@ export function isJackPot(): boolean {
 
 export function didSpinWin() {
     const random = Math.floor(Math.random() * 100)
-    return random < 45
+    return false
 }
 
 export function specialCoinEarned() {
