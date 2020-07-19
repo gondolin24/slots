@@ -82,7 +82,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                 {Greeting()}
             </IonCard>
 
-            <IonButton expand="full" color={"money"} disabled={(metaData.bankBalance < 0)}
+            <IonButton expand="full" color={"money"} disabled={(metaData.bankBalance < 25)}
                        onClick={(e) => {
                            setSafety(true)
                            setDidWin(didSpinWin())
@@ -106,7 +106,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
             {/*        </IonRange>*/}
             {/*    </IonItem>*/}
             {/*}*/}
-            {(metaData.bankBalance >= 0) &&
+            {(metaData.bankBalance >= 25) &&
             <IonItem>
                 <IonRange min={25} max={sliderRange} color="money" pin={true}
                           onIonChange={e => {
