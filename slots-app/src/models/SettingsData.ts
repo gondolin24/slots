@@ -12,6 +12,9 @@ export class SettingsData {
     }
 
     static fromJson(schema: any) {
+        if (schema === undefined) {
+            return new SettingsData(true)
+        }
         const vibration = (schema.vibration === null || schema.vibration === undefined) ? true : schema.vibration
         return new SettingsData(vibration)
     }

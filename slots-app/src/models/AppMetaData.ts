@@ -18,7 +18,6 @@ export class AppMetaData {
     }
 
     toJson() {
-        console.log("yehhh")
         return {
             metaData: {
                 specialCoins: this.specialCoins,

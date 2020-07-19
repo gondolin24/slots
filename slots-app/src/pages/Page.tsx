@@ -44,7 +44,8 @@ const Page: React.FC = () => {
                 setAppMetaData(metaData)
                 setInitial(false)
             }
-        }).catch(() => {
+        }).catch((e) => {
+            console.log(e)
         })
     }, [inital])
 
