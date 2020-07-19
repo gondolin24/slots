@@ -13,6 +13,7 @@ import PathNotes from "../components/patch/PatchNotes";
 import Rewards from "../components/rewards/Rewards";
 import SettingsPage from "../components/settings/SettingsPage";
 import {SettingsData} from "../models/SettingsData";
+import {StoreMetaData} from "../models/store/StoreMetaData";
 
 const {Storage} = Plugins
 
@@ -29,7 +30,8 @@ const Page: React.FC = () => {
 
     const {name} = useParams<{ name: string; }>();
     let page = null
-    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0, new SettingsData(true)));
+    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0, new SettingsData(true),
+        new StoreMetaData(0)));
     const [inital, setInitial] = useState(true);
 
     useEffect(() => {
