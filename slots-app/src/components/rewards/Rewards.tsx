@@ -43,7 +43,7 @@ const Rewards: React.FC<RewardsProps> = (props) => {
                     </IonItem>
                     <IonItem>
                         <IonLabel className={'center-align-label'}>
-                            Permanent increase special coin finding by 4%
+                           + 4% chance to find special coin
                         </IonLabel>
                     </IonItem>
                     <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
