@@ -13,8 +13,8 @@ interface SettingsPageProps {
 }
 
 const SettingsPage: React.FC<SettingsPageProps> = (props) => {
-    const [number, setNumber] = useState<number>();
-    const [numberSpecial, setNumberSpecial] = useState<number>();
+    const [number, setNumber] = useState<number>(props.metaData.bankBalance);
+    const [numberSpecial, setNumberSpecial] = useState<number>(props.metaData.specialCoins);
 
     const [checked, setChecked] = useState(props.metaData.settingsData.vibration);
     const [override, setOverRide] = useState(false);

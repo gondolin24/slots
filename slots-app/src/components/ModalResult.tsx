@@ -91,10 +91,10 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             const oldBet = props.betAmount
             props.setSetMetaData(props.metaData)
 
-            if (newBalance < oldBalance) {
-                props.setBetAmount(props.metaData.bankBalance)
-            } else {
+            if (oldBet <= newBalance) {
                 props.setBetAmount(oldBet)
+            } else {
+                props.setBetAmount(newBalance)
             }
 
             if (newBalance < MAX_BET) {
