@@ -36,6 +36,9 @@ export class AppMetaData {
     getWinBonusAmount(){
         return this.storeMetaData.redeemedWinChance
     }
+    getSpecialCoinRedeemed(){
+        return this.storeMetaData.redeemedSpecialCoins
+    }
 
     static fromJson(schema: any) {
         const bankBalance = schema.bankBalance

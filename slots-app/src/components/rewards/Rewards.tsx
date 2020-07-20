@@ -3,6 +3,7 @@ import {IonButton, IonContent, IonIcon, IonItem, IonLabel, IonSlide, IonSlides} 
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import BonusMultiplierSlide from "./BonusMultiplierSlide";
 import BonusWinChanceSlide from "./BonusWinChanceSlide";
+import SpecialCoinSlide from "./SpecialCoinSlide";
 
 interface RewardsProps {
     setSetMetaData: (val: any) => void
@@ -13,21 +14,7 @@ const Rewards: React.FC<RewardsProps> = (props) => {
     return (
         <IonContent fullscreen className="ion-padding" scroll-y="false">
             <IonSlides>
-                <IonSlide>
-                    <h2>Special Coin</h2>
-                    <p><b>Special Coin</b> is a powerful coin that is found in game. You can also buy it for coins</p>
-                    <IonItem>
-                        <IonLabel className={'center-align-label'}>
-                            200,000 coins
-                        </IonLabel>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel className={'center-align-label'}>
-                            1 Special coin
-                        </IonLabel>
-                    </IonItem>
-                    <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
-                </IonSlide>
+                <SpecialCoinSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
                 <BonusMultiplierSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
 
                 <BonusWinChanceSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
@@ -43,7 +30,7 @@ const Rewards: React.FC<RewardsProps> = (props) => {
                     </IonItem>
                     <IonItem>
                         <IonLabel className={'center-align-label'}>
-                           + 4% chance to find special coin
+                            + 4% chance to find special coin
                         </IonLabel>
                     </IonItem>
                     <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>

@@ -25,3 +25,10 @@ export function calculateWinBonus(timesRedeemed: number = 0) {
     }
     return num
 }
+
+
+export function calculateSpecialCoinPrice(timesRedeemed: number = 0) {
+    const basePrice = 200000
+    const power = timesRedeemed * .025
+    return Math.ceil(Math.pow(basePrice, power) * basePrice)
+}
