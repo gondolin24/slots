@@ -29,6 +29,11 @@ export class AppMetaData {
         }
     }
 
+    getMultiplierBonusAmount(){
+        return this.storeMetaData.redeemedMultiplierBonus
+    }
+
+
     static fromJson(schema: any) {
         const bankBalance = schema.bankBalance
         const rewardMultiplier = schema.rewardMultiplier || 0

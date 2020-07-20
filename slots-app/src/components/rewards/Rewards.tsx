@@ -33,7 +33,7 @@ const Rewards: React.FC = () => {
                     </IonItem>
                     <IonItem>
                         <IonLabel className={'center-align-label'}>
-                            Permanent + 0.5 multiplier
+                            Permanent + 0.25 multiplier
                         </IonLabel>
                     </IonItem>
                     <IonButton fill="clear">Can't Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>

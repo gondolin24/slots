@@ -1,7 +1,7 @@
 export class SettingsData {
     vibration: boolean
 
-    constructor(vibration: boolean) {
+    constructor(vibration: boolean = true) {
         this.vibration = vibration
     }
 
@@ -13,7 +13,7 @@ export class SettingsData {
 
     static fromJson(schema: any) {
         if (schema === undefined) {
-            return new SettingsData(true)
+            return new SettingsData()
         }
         const vibration = (schema.vibration === null || schema.vibration === undefined) ? true : schema.vibration
         return new SettingsData(vibration)

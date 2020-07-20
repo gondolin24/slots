@@ -30,8 +30,8 @@ const Page: React.FC = () => {
 
     const {name} = useParams<{ name: string; }>();
     let page = null
-    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0, new SettingsData(true),
-        new StoreMetaData(0)));
+    const [appMetaData, setAppMetaData] = useState(new AppMetaData(1000, 0, 0, new SettingsData(),
+        new StoreMetaData()));
     const [inital, setInitial] = useState(true);
 
     useEffect(() => {
