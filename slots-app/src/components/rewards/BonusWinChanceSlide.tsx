@@ -37,7 +37,7 @@ const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
             {!redeemable &&
             <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
             }
-            {redeemable &&
+            {(redeemable && props.metaData.getWinBonusAmount() <= 20) &&
             <IonButton fill="clear" onClick={() => {
                 const newAmount = props.metaData.storeMetaData.redeemedWinChance + 1
                 const newBalance = props.metaData.specialCoins - cost

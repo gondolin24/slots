@@ -38,7 +38,7 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
             {!redeemable &&
             <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
             }
-            {(redeemable && props.metaData.getMultiplierBonusAmount()) &&
+            {(redeemable) &&
             <IonButton fill="clear" onClick={() => {
                 const newAmount = props.metaData.storeMetaData.redeemedMultiplierBonus + 1
                 const newBalance = props.metaData.specialCoins - cost
