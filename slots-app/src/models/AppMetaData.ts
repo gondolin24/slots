@@ -33,6 +33,9 @@ export class AppMetaData {
         return this.storeMetaData.redeemedMultiplierBonus
     }
 
+    getWinBonusAmount(){
+        return this.storeMetaData.redeemedWinChance
+    }
 
     static fromJson(schema: any) {
         const bankBalance = schema.bankBalance

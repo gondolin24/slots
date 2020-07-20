@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
-import {calculateMultiplierBonusPrice, calculateWinBonusPrice} from "../../TransactionEngine";
+import {calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
@@ -9,43 +9,42 @@ interface SlideProps {
     metaData: AppMetaData
 }
 
-const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
+const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
 
-    const initialCost = calculateMultiplierBonusPrice(props.metaData.getMultiplierBonusAmount())
+    const initialCost = calculateWinBonusPrice(props.metaData.getWinBonusAmount())
     const [cost, setCost] = useState(initialCost)
     const [redeemable, setRedeemable] = useState((cost <= props.metaData.specialCoins))
     useEffect(() => {
-        const newCost = calculateMultiplierBonusPrice(props.metaData.getMultiplierBonusAmount())
+        const newCost = calculateWinBonusPrice(props.metaData.getWinBonusAmount())
         setCost(newCost)
         setRedeemable((newCost <= props.metaData.specialCoins))
     }, [props.metaData.specialCoins])
 
     return (
         <IonSlide>
-            <h2>Multiplier Bonus</h2>
-            <p><b>Multiplier Bonus</b> This bonus scales vertically. Permanently adds a bonus to every win
-                on-top the default multiplier</p>
+            <h2>Win Chance</h2>
+            <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    {calculateMultiplierBonusPrice(props.metaData.getMultiplierBonusAmount())} special coins
+                    {cost} special coins
                 </IonLabel>
             </IonItem>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    Permanent + 0.25 multiplier
+                    Permanent + 3% change of winning
                 </IonLabel>
             </IonItem>
             {!redeemable &&
             <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
             }
-            {(redeemable && props.metaData.getMultiplierBonusAmount() < 4) &&
+            {(redeemable && props.metaData.getWinBonusAmount()) &&
             <IonButton fill="clear" onClick={() => {
-                const newAmount = props.metaData.storeMetaData.redeemedMultiplierBonus + 1
+                const newAmount = props.metaData.storeMetaData.redeemedWinChance + 1
                 const newBalance = props.metaData.specialCoins - cost
-                props.metaData.storeMetaData.redeemedMultiplierBonus = newAmount
-                props.metaData.specialCoins = newBalance
-                const newCost = calculateMultiplierBonusPrice(newBalance)
 
+                props.metaData.storeMetaData.redeemedWinChance = newAmount
+                props.metaData.specialCoins = newBalance
+                const newCost = calculateWinBonusPrice(newBalance)
                 setRedeemable((newCost <= props.metaData.specialCoins))
                 props.setSetMetaData(props.metaData)
             }
@@ -57,4 +56,4 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
 };
 
 
-export default BonusMultiplierSlide;
+export default BonusWinChanceSlide;

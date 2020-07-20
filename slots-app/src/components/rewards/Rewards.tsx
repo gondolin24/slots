@@ -2,6 +2,7 @@ import React from 'react';
 import {IonButton, IonContent, IonIcon, IonItem, IonLabel, IonSlide, IonSlides} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import BonusMultiplierSlide from "./BonusMultiplierSlide";
+import BonusWinChanceSlide from "./BonusWinChanceSlide";
 
 interface RewardsProps {
     setSetMetaData: (val: any) => void
@@ -29,21 +30,7 @@ const Rewards: React.FC<RewardsProps> = (props) => {
                 </IonSlide>
                 <BonusMultiplierSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
 
-                <IonSlide>
-                    <h2>Win Chance</h2>
-                    <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>
-                    <IonItem>
-                        <IonLabel className={'center-align-label'}>
-                            20 special coins
-                        </IonLabel>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel className={'center-align-label'}>
-                            Permanent + 3% change of winning
-                        </IonLabel>
-                    </IonItem>
-                    <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
-                </IonSlide>
+                <BonusWinChanceSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
             </IonSlides>
 
         </IonContent>

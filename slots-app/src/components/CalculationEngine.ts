@@ -1,3 +1,5 @@
+import {BASE_WIN_PERCENT} from "../SlotConfig";
+
 export function getMultiplier(bump: number, isJackPot: boolean) {
     const randomNum = (Math.random()) * .75
     const random = (Math.random()) * 2
@@ -19,9 +21,9 @@ export function isJackPot(): boolean {
     return result1 === result2 && result2 === result3 && result3 === result4;
 }
 
-export function didSpinWin() {
-    const random = Math.floor(Math.random() * 100)
-    return random <= 40
+export function didSpinWin(bonus: number = 0) {
+    const random = Math.floor((Math.random()) * 100)
+    return random <= (BASE_WIN_PERCENT + (100 * bonus))
 }
 
 export function specialCoinEarned() {

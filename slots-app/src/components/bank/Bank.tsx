@@ -2,7 +2,7 @@ import React from "react";
 import {IonAvatar, IonBadge, IonContent, IonItem, IonLabel} from "@ionic/react";
 
 import {AppMetaData} from "../../models/AppMetaData";
-import {calculateMultiplierBonus} from "../../TransactionEngine";
+import {calculateMultiplierBonus, calculateWinBonus} from "../../TransactionEngine";
 
 
 interface BankProps {
@@ -36,7 +36,7 @@ const Bank: React.FC<BankProps> = (props) => {
                 <IonAvatar slot={'start'}>
                     <img src="https://emoji.gg/assets/emoji/4191_StevenUniverseDance.gif"/>
                 </IonAvatar> <IonLabel>Bonus win chance</IonLabel>
-                <IonBadge color={'dark'} slot="end">{props.metaData.rewardMultiplier}</IonBadge>
+                <IonBadge color={'dark'} slot="end">{calculateWinBonus(props.metaData.getMultiplierBonusAmount())}</IonBadge>
             </IonItem>
         </IonContent>
     );
