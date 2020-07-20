@@ -1,8 +1,14 @@
 import React from 'react';
 import {IonButton, IonContent, IonIcon, IonItem, IonLabel, IonSlide, IonSlides} from "@ionic/react";
-import {arrowForwardSharp} from 'ionicons/icons';
+import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
+import BonusMultiplierSlide from "./BonusMultiplierSlide";
 
-const Rewards: React.FC = () => {
+interface RewardsProps {
+    setSetMetaData: (val: any) => void
+    metaData: any
+}
+
+const Rewards: React.FC<RewardsProps> = (props) => {
     return (
         <IonContent fullscreen className="ion-padding" scroll-y="false">
             <IonSlides>
@@ -16,29 +22,12 @@ const Rewards: React.FC = () => {
                     </IonItem>
                     <IonItem>
                         <IonLabel className={'center-align-label'}>
-                           1 Special coin
+                            1 Special coin
                         </IonLabel>
                     </IonItem>
-                    <IonButton fill="clear">Can't Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
+                    <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
                 </IonSlide>
-
-                <IonSlide>
-                    <h2>Multiplier Bonus</h2>
-                    <p><b>Multiplier Bonus</b> This bonus scales vertically. Permanently adds a bonus to every win
-                        on-top the default multiplier</p>
-                    <IonItem>
-                        <IonLabel className={'center-align-label'}>
-                            20 special coins
-                        </IonLabel>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel className={'center-align-label'}>
-                            Permanent + 0.25 multiplier
-                        </IonLabel>
-                    </IonItem>
-                    <IonButton fill="clear">Can't Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
-                </IonSlide>
-
+                <BonusMultiplierSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
 
                 <IonSlide>
                     <h2>Win Chance</h2>
@@ -53,11 +42,10 @@ const Rewards: React.FC = () => {
                             Permanent + 3% change of winning
                         </IonLabel>
                     </IonItem>
-                    <IonButton fill="clear">Can't Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
+                    <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
                 </IonSlide>
-
-
             </IonSlides>
+
         </IonContent>
     );
 };

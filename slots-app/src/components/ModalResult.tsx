@@ -6,6 +6,8 @@ import {getMultiplier, getWinningAmount, isJackPot, specialCoinEarned} from "./C
 import Lottieplayer from "./LottiePlayer";
 import {jackPotLottie, losingImage, specialCoinLottie, winningImage} from "./lottie/LottieFactory";
 import {MAX_BET} from "../SlotConfig";
+import {calculateMultiplierBonus} from "../TransactionEngine";
+import {AppMetaData} from "../models/AppMetaData";
 
 
 interface ModelProps {
@@ -16,7 +18,7 @@ interface ModelProps {
     showModal: boolean
     didWin: boolean
     betAmount: number
-    metaData: any
+    metaData: AppMetaData
     resultData: any
     setResultData: (val: any) => void
     setBetAmount: (val: any) => void
@@ -67,7 +69,8 @@ const ModalResult: React.FC<ModelProps> = (props) => {
         if (props.safety) {
             props.setSafety(false)
             const jackPot = isJackPot()
-            const multiplier = getMultiplier(0, jackPot)
+            const bump = calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())
+            const multiplier = getMultiplier(bump, jackPot)
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
             const multiplierLabel = `${multiplier.toFixed(2)} X`
             const newBalance = (props.didWin) ? (props.metaData.bankBalance + winLostAmount) : (props.metaData.bankBalance - props.betAmount)
@@ -121,13 +124,38 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             {!props.safety && props.resultData.spinResults}
 
             <IonList>
-                <IonItem>
-                    <IonLabel>Results</IonLabel>
-                </IonItem>
-                <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={props.betAmount.toString()}/>
-                <BadgeLabel label={'Multiplier'} color={'primary'} labelValue={props.resultData.multiplierLabel}/>
-                {props.resultData.totalWinningsLabel}
-                <BadgeLabel label={'Bank Balance'} labelValue={props.resultData.bankLabel} color={'money'}/>
+
+                {
+                    props.didWin &&
+                    <div>
+                        <IonItem>
+                            <IonLabel>Winner</IonLabel>
+                        </IonItem>
+
+                        <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={props.betAmount.toString()}/>
+                        <BadgeLabel label={'Multiplier'} color={'primary'}
+                                    labelValue={props.resultData.multiplierLabel}/>
+                        {props.resultData.totalWinningsLabel}
+                        <BadgeLabel label={'Bank Balance'} labelValue={props.resultData.bankLabel} color={'money'}/>
+
+                    </div>
+
+                }
+                {
+                    ! props.didWin &&
+                    <div>
+                        <IonItem>
+                            <IonLabel>Try Again</IonLabel>
+                        </IonItem>
+
+                        <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={props.betAmount.toString()}/>
+                        <BadgeLabel label={'Bank Balance'} labelValue={props.resultData.bankLabel} color={'danger'}/>
+
+                    </div>
+
+                }
+
+
             </IonList>
 
             <IonButton onClick={() => props.setShowModal(false)}>Thanks for playing</IonButton>

@@ -78,7 +78,7 @@ const Page: React.FC = () => {
             break
         case 'Rewards':
             headerName = 'Shop Rewards'
-            page = <Rewards/>
+            page = <Rewards metaData={appMetaData} setSetMetaData={setChildMetaData}/>
             break
         case 'SettingsPage':
             headerName = 'Settings'

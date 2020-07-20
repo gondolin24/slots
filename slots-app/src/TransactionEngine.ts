@@ -1,4 +1,4 @@
-export function getMultiplierBonusPrice(timesRedeemed: number = 0) {
+export function calculateMultiplierBonusPrice(timesRedeemed: number = 0) {
     const basePrice = 20
     const power = timesRedeemed * .15
     return Math.ceil(Math.pow(basePrice, power) * basePrice)
