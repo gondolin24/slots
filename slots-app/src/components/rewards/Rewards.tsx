@@ -31,6 +31,24 @@ const Rewards: React.FC<RewardsProps> = (props) => {
                 <BonusMultiplierSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
 
                 <BonusWinChanceSlide setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
+
+                <IonSlide>
+                    <h2>Extra Special Coin</h2>
+                    <p><b>Extra Special Coin</b> is an even more powerful coin. With this, the gods will look down on
+                        you</p>
+                    <IonItem>
+                        <IonLabel className={'center-align-label'}>
+                            30 Special coins
+                        </IonLabel>
+                    </IonItem>
+                    <IonItem>
+                        <IonLabel className={'center-align-label'}>
+                            Permanent increase special coin finding by 4%
+                        </IonLabel>
+                    </IonItem>
+                    <IonButton fill="clear">Unable to Redeem <IonIcon slot="end" md={closeSharp}/></IonButton>
+                </IonSlide>
+
             </IonSlides>
 
         </IonContent>

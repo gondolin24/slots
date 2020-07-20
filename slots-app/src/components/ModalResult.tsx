@@ -72,7 +72,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             const bump = calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())
             const multiplier = getMultiplier(bump, jackPot)
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
-            const multiplierLabel = `${multiplier.toFixed(2)} X`
+            const multiplierLabel = `${(multiplier - bump).toFixed(2)} X + ${bump}`
             const newBalance = (props.didWin) ? (props.metaData.bankBalance + winLostAmount) : (props.metaData.bankBalance - props.betAmount)
             const bankLabel = ((newBalance < 0) ? 0 : newBalance).toString()
             const totalWinningsLabel = (props.didWin) ? (
@@ -86,7 +86,8 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 bankLabel,
                 totalWinningsLabel,
                 multiplierLabel,
-                spinResults
+                spinResults,
+                bonusMultiplierLabel: `${bump}`
             }
             props.setResultData(data)
             const oldBalance = props.metaData.bankBalance
@@ -142,7 +143,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
 
                 }
                 {
-                    ! props.didWin &&
+                    !props.didWin &&
                     <div>
                         <IonItem>
                             <IonLabel>Try Again</IonLabel>

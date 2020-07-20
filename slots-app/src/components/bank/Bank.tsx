@@ -36,7 +36,7 @@ const Bank: React.FC<BankProps> = (props) => {
                 <IonAvatar slot={'start'}>
                     <img src="https://emoji.gg/assets/emoji/4191_StevenUniverseDance.gif"/>
                 </IonAvatar> <IonLabel>Bonus win chance</IonLabel>
-                <IonBadge color={'dark'} slot="end">{calculateWinBonus(props.metaData.getMultiplierBonusAmount())}</IonBadge>
+                <IonBadge color={'dark'} slot="end">{calculateWinBonus(props.metaData.getWinBonusAmount())}</IonBadge>
             </IonItem>
         </IonContent>
     );

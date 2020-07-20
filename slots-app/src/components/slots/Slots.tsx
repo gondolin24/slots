@@ -7,6 +7,8 @@ import ModalResult from "../ModalResult";
 import _ from "lodash";
 import {didSpinWin} from "../CalculationEngine";
 import {MAX_BET} from "../../SlotConfig";
+import {calculateWinBonus} from "../../TransactionEngine";
+import {AppMetaData} from "../../models/AppMetaData";
 
 
 function Greeting() {
@@ -18,7 +20,7 @@ function Greeting() {
 
 interface SlotsInterface {
     setMetaData: (val: any) => void
-    metaData: any
+    metaData: AppMetaData
 }
 
 const Slots: React.FC<SlotsInterface> = (props) => {
@@ -46,6 +48,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
     const [resultData, setResultData] = useState({
         multiplierLabel: '',
         bankLabel: '',
+        bonusMultiplierLabel: '',
         totalWinningsLabel: (<div/>),
         spinResults: (<div/>)
     })
@@ -85,7 +88,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
             <IonButton expand="full" color={"money"} disabled={(metaData.bankBalance < 25)}
                        onClick={(e) => {
                            setSafety(true)
-                           setDidWin(didSpinWin())
+                           setDidWin(didSpinWin(calculateWinBonus(props.metaData.getWinBonusAmount())))
                            setShowModal(true)
                            // @ts-ignore
                            if (metaData.settingsData.vibration) {
