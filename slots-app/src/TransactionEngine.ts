@@ -26,6 +26,21 @@ export function calculateWinBonus(timesRedeemed: number = 0) {
     return num
 }
 
+export function calculateGodsBonus(timesRedeemed: number = 0) {
+    let num = 0
+    for (let i = 0; i < timesRedeemed; i++) {
+        num = num + 0.04
+    }
+    return num
+}
+
+export function calculateGodsBonusPrice(timesRedeemed: number = 0) {
+    const basePrice = 30
+    const power = timesRedeemed * .09
+    return Math.ceil(Math.pow(basePrice, power) * basePrice)
+}
+
+
 export function calculateSpecialCoinPrice(timesRedeemed: number = 0) {
     const basePrice = 200000
     const power = timesRedeemed * .025

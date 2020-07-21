@@ -29,15 +29,20 @@ export class AppMetaData {
         }
     }
 
-    getMultiplierBonusAmount(){
+    getMultiplierBonusAmount() {
         return this.storeMetaData.redeemedMultiplierBonus
     }
 
-    getWinBonusAmount(){
+    getWinBonusAmount() {
         return this.storeMetaData.redeemedWinChance
     }
-    getSpecialCoinRedeemed(){
+
+    getSpecialCoinRedeemed() {
         return this.storeMetaData.redeemedSpecialCoins
+    }
+
+    getGodsCoinRedeemed() {
+        return this.storeMetaData.redeemedGodsCoin
     }
 
     static fromJson(schema: any) {

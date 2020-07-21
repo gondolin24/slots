@@ -6,7 +6,7 @@ import {getMultiplier, getWinningAmount, isJackPot, specialCoinEarned} from "./C
 import Lottieplayer from "./LottiePlayer";
 import {jackPotLottie, losingImage, specialCoinLottie, winningImage} from "./lottie/LottieFactory";
 import {MAX_BET} from "../SlotConfig";
-import {calculateMultiplierBonus} from "../TransactionEngine";
+import {calculateGodsBonus, calculateMultiplierBonus} from "../TransactionEngine";
 import {AppMetaData} from "../models/AppMetaData";
 
 
@@ -106,8 +106,8 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             } else {
                 props.setSliderMax(MAX_BET)
             }
-
-            setShowPopover(specialCoinEarned())
+            const getSpecialCoin = calculateGodsBonus(props.metaData.getGodsCoinRedeemed())
+            setShowPopover(specialCoinEarned(getSpecialCoin))
         }
     })
 
