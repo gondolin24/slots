@@ -48,6 +48,7 @@ const SpecialCoinSlide: React.FC<SlideProps> = (props) => {
 
                 const newCost = calculateSpecialCoinPrice(newAmount)
                 setRedeemable((newCost <= props.metaData.bankBalance))
+                setCost(newCost)
                 props.setSetMetaData(props.metaData)
             }
             }>Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>

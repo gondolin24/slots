@@ -5,7 +5,21 @@ const PathNotes: React.FC = () => {
 
     return (
         <IonContent>
-
+            <IonItem lines="none">
+                <IonLabel>
+                    Release 1.3.1
+                </IonLabel>
+            </IonItem>
+            <IonItem lines={"none"}>
+                <IonLabel className="ion-text-wrap">
+                    Minor UI changes
+                </IonLabel>
+            </IonItem>
+            <IonItem>
+                <IonLabel className="ion-text-wrap">
+                    more rewards redeemable
+                </IonLabel>
+            </IonItem>
             <IonItem lines="none">
                 <IonLabel>
                     Release 1.3.0

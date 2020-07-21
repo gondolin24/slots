@@ -1,4 +1,14 @@
-import {IonButton, IonCard, IonContent, IonItem, IonLabel, IonLoading, IonModal, IonRange} from '@ionic/react';
+import {
+    IonButton,
+    IonCard,
+    IonContent,
+    IonItem,
+    IonLabel,
+    IonLoading,
+    IonModal,
+    IonRange, IonSelect,
+    IonSelectOption
+} from '@ionic/react';
 import React, {useEffect, useState} from 'react';
 import {Vibration} from '@ionic-native/vibration';
 import Lottieplayer from "../LottiePlayer";
@@ -28,6 +38,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
     const [betAmount, setBetAmount] = useState(25)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 0
+    const [world, setWorld] = useState<string>();
 
     const [buttonDisable, setButtonDisable] = useState(initialDisable)
 
@@ -80,6 +91,8 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                     Bank Balance
                 </IonLabel>
                 <IonLabel>{metaData.bankBalance}</IonLabel>
+
+
             </IonItem>
             <IonCard>
                 {Greeting()}
