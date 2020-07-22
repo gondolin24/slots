@@ -1,30 +1,20 @@
-import {
-    IonButton,
-    IonCard,
-    IonContent,
-    IonItem,
-    IonLabel,
-    IonLoading,
-    IonModal,
-    IonRange, IonSelect,
-    IonSelectOption
-} from '@ionic/react';
+import {IonButton, IonCard, IonContent, IonItem, IonLabel, IonRange} from '@ionic/react';
 import React, {useEffect, useState} from 'react';
 import {Vibration} from '@ionic-native/vibration';
 import Lottieplayer from "../LottiePlayer";
-import animatedData from '../../lottie-files/Standard.json'
 import ModalResult from "../ModalResult";
 import _ from "lodash";
 import {didSpinWin} from "../CalculationEngine";
 import {MAX_BET} from "../../SlotConfig";
 import {calculateWinBonus} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
+import {getThemePack} from "../lottie/LottieFactory";
 
 
-function Greeting() {
+function Greeting(themePack: any) {
     return (
         <div className={'derp'}>
-            <Lottieplayer source={animatedData} animationDefault={false}/>
+            <Lottieplayer source={themePack.slotImage} animationDefault={true}/>
         </div>)
 }
 
@@ -35,6 +25,7 @@ interface SlotsInterface {
 
 const Slots: React.FC<SlotsInterface> = (props) => {
     const {metaData} = props
+    const [themePack, setThemePack] = useState(getThemePack(metaData.theme))
     const [betAmount, setBetAmount] = useState(25)
     const [didWin, setDidWin] = useState(true)
     const initialDisable = metaData.bankBalance < 0
@@ -47,13 +38,14 @@ const Slots: React.FC<SlotsInterface> = (props) => {
     const [sliderRange, setSliderRange] = useState(metaData.bankBalance);
 
     useEffect(() => {
+        setThemePack(getThemePack(metaData.theme))
         if (metaData.bankBalance < MAX_BET) {
             setSliderRange(metaData.bankBalance)
         } else {
             setSliderRange(MAX_BET)
         }
 
-    })
+    },[metaData.bankBalance, metaData.theme])
 
     const [safety, setSafety] = useState(false);
     const [resultData, setResultData] = useState({
@@ -95,7 +87,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
             </IonItem>
             <IonCard>
-                {Greeting()}
+                {Greeting(themePack)}
             </IonCard>
 
             <IonButton expand="full" color={"money"} disabled={(metaData.bankBalance < 25)}

@@ -138,6 +138,16 @@ background: #e3342f;
   height: 300px;
   background: #38c172;
 }
+
+.winnerLightGreen{
+  height: 300px;
+  background: lightseagreen;
+}
+
+.winnerAqua{
+  height: 300px;
+  background: aquamarine;
+}
 .winnerNoneGreen{
   height: 300px;
 

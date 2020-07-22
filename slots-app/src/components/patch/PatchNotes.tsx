@@ -1,10 +1,26 @@
 import React from "react";
-import {IonContent, IonItem, IonLabel} from "@ionic/react";
+import {IonContent, IonItem, IonLabel, IonText} from "@ionic/react";
 
 const PathNotes: React.FC = () => {
 
     return (
         <IonContent>
+
+            <IonItem lines="none">
+                <IonLabel>
+                    Release 1.3.2
+                </IonLabel>
+            </IonItem>
+            <IonItem>
+                <IonText className="ion-text-wrap">
+                        <ul>
+                            <li>2.0 % chance to get 2 special coins</li>
+                            <li>0.2 % chance to get 3 special coins</li>
+                            <li>Slowly rolling our dog theme</li>
+
+                        </ul>
+                </IonText>
+            </IonItem>
             <IonItem lines="none">
                 <IonLabel>
                     Release 1.3.1

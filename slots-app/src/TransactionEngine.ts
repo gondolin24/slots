@@ -43,6 +43,6 @@ export function calculateGodsBonusPrice(timesRedeemed: number = 0) {
 
 export function calculateSpecialCoinPrice(timesRedeemed: number = 0) {
     const basePrice = 200000
-    const power = timesRedeemed * .001
+    const power = timesRedeemed * .0001
     return Math.ceil(Math.pow(basePrice, power) * basePrice)
 }

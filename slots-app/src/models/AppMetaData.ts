@@ -7,14 +7,16 @@ export class AppMetaData {
     specialCoins: number
     settingsData: SettingsData
     storeMetaData: StoreMetaData
+    theme: string
 
     constructor(bankBalance: number, rewardMultiplier: number, specialCoins: number, settingsData: SettingsData,
-                storeMetaData: StoreMetaData) {
+                storeMetaData: StoreMetaData, theme: string = 'default') {
         this.bankBalance = bankBalance
         this.specialCoins = specialCoins
         this.rewardMultiplier = rewardMultiplier
         this.settingsData = settingsData
         this.storeMetaData = storeMetaData
+        this.theme = theme
     }
 
     toJson() {
@@ -24,7 +26,8 @@ export class AppMetaData {
                 bankBalance: this.bankBalance,
                 rewardMultiplier: this.rewardMultiplier,
                 settingsData: this.settingsData.toJson(),
-                storeMetaData: this.storeMetaData.toJson()
+                storeMetaData: this.storeMetaData.toJson(),
+                theme: this.theme
             }
         }
     }
@@ -51,6 +54,7 @@ export class AppMetaData {
         const specialCoins = schema.specialCoins || 0
         const settingsData = SettingsData.fromJson(schema.settingsData)
         const storeMetaData = StoreMetaData.fromJson(schema.storeMetaData)
-        return new AppMetaData(bankBalance, rewardMultiplier, specialCoins, settingsData, storeMetaData)
+        const theme = schema.theme || 'default'
+        return new AppMetaData(bankBalance, rewardMultiplier, specialCoins, settingsData, storeMetaData, theme)
     }
 }

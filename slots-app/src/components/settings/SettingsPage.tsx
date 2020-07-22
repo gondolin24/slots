@@ -1,6 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonToggle} from "@ionic/react";
-import {text} from "ionicons/icons";
+import {
+    IonButton,
+    IonContent,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonSelect,
+    IonSelectOption,
+    IonToggle
+} from "@ionic/react";
 
 
 function vibrationLabel(checked: boolean) {
@@ -13,6 +22,9 @@ interface SettingsPageProps {
 }
 
 const SettingsPage: React.FC<SettingsPageProps> = (props) => {
+    const [theme, setTheme] = useState<string>();
+    const [gender, setGender] = useState<string>();
+
     const [number, setNumber] = useState<number>(props.metaData.bankBalance);
     const [numberSpecial, setNumberSpecial] = useState<number>(props.metaData.specialCoins);
 
@@ -37,7 +49,18 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
                         props.setSetMetaData(props.metaData)
                     }}/>
                 </IonItem>
-
+                <IonItem>
+                    <IonLabel>Theme</IonLabel>
+                    <IonSelect value={theme} placeholder="Select theme" onIonChange={e => {
+                        console.log('hey')
+                        setTheme(e.detail.value)
+                        props.metaData.theme = e.detail.value
+                        props.setSetMetaData(props.metaData)
+                    }}>
+                        <IonSelectOption value="default">default</IonSelectOption>
+                        <IonSelectOption value="dogs">dogs</IonSelectOption>
+                    </IonSelect>
+                </IonItem>
 
                 <IonItem>
                     <IonLabel>Set Override</IonLabel>
@@ -52,10 +75,12 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
                         <IonInput type="number" value={numberSpecial} placeholder="special coins"
                                   onIonChange={e => setNumberSpecial(parseInt(e.detail.value!, 10))}/>
                     </IonItem>
+
                     <IonItem>
                         <IonInput type="number" value={number} placeholder="normal coins"
                                   onIonChange={e => setNumber(parseInt(e.detail.value!, 10))}/>
                     </IonItem>
+
                     <IonItem>
                         <IonInput value={text} placeholder="Password" onIonChange={e => setText(e.detail.value!)}
                                   clearInput/>

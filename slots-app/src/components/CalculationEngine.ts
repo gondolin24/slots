@@ -21,6 +21,8 @@ export function isJackPot(): boolean {
     return result1 === result2 && result2 === result3 && result3 === result4;
 }
 
+
+
 export function didSpinWin(bonus: number = 0) {
     const random = Math.floor((Math.random()) * 100)
     return random <= (BASE_WIN_PERCENT + (100 * bonus))

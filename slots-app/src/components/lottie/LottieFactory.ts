@@ -9,6 +9,12 @@ import * as LoserOne from '../../lottie-files/loser/loser-one.json'
 import * as LoserTwo from '../../lottie-files/loser/loser-two.json'
 import * as LoserThree from '../../lottie-files/loser/loser-three.json'
 
+import * as DefaultSlotImage from '../../lottie-files/Standard.json'
+import * as DogSlot from '../../lottie-files/themes/Dogs/slot/SlotImage.json'
+import * as DogSpecialCoin from '../../lottie-files/themes/Dogs/specialCoins/Winner.json'
+import * as DogWinnerOne from '../../lottie-files/themes/Dogs/winner/winner-one.json'
+import * as DogWinnerTwo from '../../lottie-files/themes/Dogs/winner/winner-two.json'
+import * as DogWinnerThree from '../../lottie-files/themes/Dogs/winner/winner-three.json'
 
 export function jackPotLottie() {
     return {
@@ -17,7 +23,16 @@ export function jackPotLottie() {
         className: 'winner'
     }
 }
-export function specialCoinLottie() {
+
+export function specialCoinLottie(theme: string = 'default') {
+    if (theme !== 'default') {
+        return {
+            src: DogSpecialCoin,
+            animationDefault: true,
+            className: 'winner'
+        }
+    }
+
     return {
         src: SpecialCoin,
         animationDefault: true,
@@ -25,7 +40,10 @@ export function specialCoinLottie() {
     }
 }
 
-export function winningImage() {
+export function winningImage(theme: string = 'default') {
+    if (theme !== 'default') {
+        return winningDog()
+    }
     const rand = Math.floor((Math.random() * 3))
     switch (rand) {
         case 1:
@@ -45,6 +63,31 @@ export function winningImage() {
             return {
                 src: WinnerThree,
                 className: 'winnerNoneGreen',
+                animationDefault: true
+            }
+    }
+}
+
+export function winningDog() {
+    const rand = Math.floor((Math.random() * 3))
+    switch (rand) {
+        case 1:
+            return {
+                src: DogWinnerOne,
+                animationDefault: true,
+                className: 'winnerLightGreen'
+            }
+        case 2:
+            return {
+                src: DogWinnerTwo,
+                animationDefault: true,
+                className: 'winnerLightGreen'
+
+            }
+        default:
+            return {
+                src: DogWinnerThree,
+                className: 'winnerAqua',
                 animationDefault: true
             }
     }
@@ -71,4 +114,13 @@ export function losingImage() {
                 animationDefault: true
             }
     }
+}
+
+export function getThemePack(theme: string = 'default') {
+    const slotImage = (theme === 'default') ? DefaultSlotImage : DogSlot
+
+    return {
+        slotImage
+    }
+
 }

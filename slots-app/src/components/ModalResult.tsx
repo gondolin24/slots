@@ -37,8 +37,8 @@ function Lost() {
     )
 }
 
-function Win() {
-    const {src, animationDefault, className} = winningImage()
+function Win(meta: AppMetaData) {
+    const {src, animationDefault, className} = winningImage(meta.theme)
     return (
         <div className={className}>
             <Lottieplayer source={src} animationDefault={animationDefault}/>
@@ -56,8 +56,8 @@ function JackPotLottie() {
 
 }
 
-function SpinResult(win: boolean) {
-    if (win) return Win()
+function SpinResult(win: boolean, metaData: AppMetaData) {
+    if (win) return Win(metaData)
     return Lost()
 }
 
@@ -81,7 +81,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 <BadgeLabel label={'Total Winnings'} labelValue={` - ${props.betAmount}`} color={'danger'}/>
             )
 
-            const spinResults = (jackPot && props.didWin) ? JackPotLottie() : SpinResult(props.didWin)
+            const spinResults = (jackPot && props.didWin) ? JackPotLottie() : SpinResult(props.didWin, props.metaData)
             const data = {
                 bankLabel,
                 totalWinningsLabel,
@@ -117,7 +117,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             props.setShowModal(false)
         });
     });
-    const special = specialCoinLottie()
+    const special = specialCoinLottie(props.metaData.theme)
 
     return (
         <IonModal isOpen={props.showModal}>
@@ -165,7 +165,9 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 isOpen={showPopover}
                 cssClass='my-custom-class'
                 onDidDismiss={e => {
-                    const newCoins = 1 + props.metaData.specialCoins
+                    const bonus = ((Math.random() * 100) < 2) ? 1 : 0
+                    const nani = ((Math.random() * 1000) < 2) ? 1 : 0
+                    const newCoins = 1 + nani + bonus + props.metaData.specialCoins
                     props.metaData.specialCoins = newCoins
                     props.setSetMetaData(props.metaData)
                     setShowPopover(false)
