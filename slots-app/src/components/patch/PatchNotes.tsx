@@ -1,11 +1,11 @@
 import React from "react";
 import {IonContent, IonItem, IonLabel, IonText} from "@ionic/react";
+import PathNoteItem from "./PatchNotesItem";
 
 const PathNotes: React.FC = () => {
 
     return (
         <IonContent>
-
             <IonItem lines="none">
                 <IonLabel>
                     Release 1.3.2
@@ -13,12 +13,12 @@ const PathNotes: React.FC = () => {
             </IonItem>
             <IonItem>
                 <IonText className="ion-text-wrap">
-                        <ul>
-                            <li>2.0 % chance to get 2 special coins</li>
-                            <li>0.2 % chance to get 3 special coins</li>
-                            <li>Slowly rolling our dog theme</li>
+                    <ul>
+                        <li>2.0 % chance to get 2 special coins</li>
+                        <li>0.2 % chance to get 3 special coins</li>
+                        <li>Slowly rolling our dog theme</li>
 
-                        </ul>
+                    </ul>
                 </IonText>
             </IonItem>
             <IonItem lines="none">
@@ -26,57 +26,28 @@ const PathNotes: React.FC = () => {
                     Release 1.3.1
                 </IonLabel>
             </IonItem>
-            <IonItem lines={"none"}>
-                <IonLabel className="ion-text-wrap">
-                    Minor UI changes
-                </IonLabel>
-            </IonItem>
             <IonItem>
-                <IonLabel className="ion-text-wrap">
-                    more rewards redeemable
-                </IonLabel>
-            </IonItem>
-            <IonItem lines="none">
-                <IonLabel>
-                    Release 1.3.0
-                </IonLabel>
-            </IonItem>
-            <IonItem lines={"none"}>
-                <IonLabel className="ion-text-wrap">
-                    Minor UI changes
-                </IonLabel>
-            </IonItem>
-            <IonItem>
-                <IonLabel className="ion-text-wrap">
-                    Some rewards now redeemable
-                </IonLabel>
-            </IonItem>
-            <IonItem lines="none">
-                <IonLabel>
-                    Release 1.2.0
-                </IonLabel>
-            </IonItem>
-            <IonItem lines={"none"}>
-                <IonLabel className="ion-text-wrap">
-                    Minor Bug fixes
-                </IonLabel>
+                <IonText className="ion-text-wrap">
+                    <ul>
+                        <li>Minor UI changes</li>
+                        <li>more rewards redeemable</li>
+
+                    </ul>
+                </IonText>
             </IonItem>
 
-            <IonItem lines={"none"}>
-                <IonLabel className="ion-text-wrap">
-                    Settings vibration Toggle
-                </IonLabel>
-            </IonItem>
-            <IonItem lines={"none"}>
-                <IonLabel className="ion-text-wrap">
-                    Win change decreased
-                </IonLabel>
-            </IonItem>
-            <IonItem>
-                <IonLabel className="ion-text-wrap">
-                    Min bet of 25
-                </IonLabel>
-            </IonItem>
+            <PathNoteItem items={['Minor UI changes',
+                'Some rewards now redeemable',
+
+            ]} patchNumber={'1.3.0'}/>
+
+
+            <PathNoteItem items={[
+                'Minor Bug fixes',
+                'Settings vibration Toggle',
+                'Win change decreased', '  Min bet of 25'
+            ]} patchNumber={'1.2.0'}/>
+
 
             <IonItem lines="none">
                 <IonLabel>
