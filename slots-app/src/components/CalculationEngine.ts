@@ -22,6 +22,19 @@ export function isJackPot(): boolean {
 }
 
 
+export function getMaxBet(bankBalance: number) {
+    if (bankBalance <= 1000000000) {
+        return 200000
+    }
+
+    const newMax = Math.floor(0.0006 * bankBalance)
+    let power = 0
+    while (newMax >= Math.pow(10, power)) {
+        power += 1
+    }
+    console.log(`${newMax} ${power}`)
+    return Math.pow(10, power)
+}
 
 export function didSpinWin(bonus: number = 0) {
     const random = Math.floor((Math.random()) * 100)

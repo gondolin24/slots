@@ -2,10 +2,9 @@ import {IonButton, IonItem, IonLabel, IonList, IonModal, IonPopover} from "@ioni
 import * as React from "react";
 import {useEffect, useState} from "react";
 import BadgeLabel from "./modal/BadgeLabel";
-import {getMultiplier, getWinningAmount, isJackPot, specialCoinEarned} from "./CalculationEngine";
+import {getMaxBet, getMultiplier, getWinningAmount, isJackPot, specialCoinEarned} from "./CalculationEngine";
 import Lottieplayer from "./LottiePlayer";
 import {jackPotLottie, losingImage, specialCoinLottie, winningImage} from "./lottie/LottieFactory";
-import {MAX_BET} from "../SlotConfig";
 import {calculateGodsBonus, calculateMultiplierBonus} from "../TransactionEngine";
 import {AppMetaData} from "../models/AppMetaData";
 
@@ -27,8 +26,8 @@ interface ModelProps {
 }
 
 
-function Lost() {
-    const {src, animationDefault} = losingImage()
+function Lost(theme: string) {
+    const {src, animationDefault} = losingImage(theme)
 
     return (
         <div className={'loser'}>
@@ -58,7 +57,7 @@ function JackPotLottie() {
 
 function SpinResult(win: boolean, metaData: AppMetaData) {
     if (win) return Win(metaData)
-    return Lost()
+    return Lost(metaData.theme)
 }
 
 
@@ -101,10 +100,10 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 props.setBetAmount(newBalance)
             }
 
-            if (newBalance < MAX_BET) {
+            if (newBalance < getMaxBet(props.metaData.bankBalance)) {
                 props.setSliderMax(newBalance)
             } else {
-                props.setSliderMax(MAX_BET)
+                props.setSliderMax(getMaxBet(props.metaData.bankBalance))
             }
             const getSpecialCoin = calculateGodsBonus(props.metaData.getGodsCoinRedeemed())
             setShowPopover(specialCoinEarned(getSpecialCoin))

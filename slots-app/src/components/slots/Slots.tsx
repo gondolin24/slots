@@ -4,8 +4,7 @@ import {Vibration} from '@ionic-native/vibration';
 import Lottieplayer from "../LottiePlayer";
 import ModalResult from "../ModalResult";
 import _ from "lodash";
-import {didSpinWin} from "../CalculationEngine";
-import {MAX_BET} from "../../SlotConfig";
+import {didSpinWin, getMaxBet} from "../CalculationEngine";
 import {calculateWinBonus} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 import {getThemePack} from "../lottie/LottieFactory";
@@ -39,13 +38,13 @@ const Slots: React.FC<SlotsInterface> = (props) => {
 
     useEffect(() => {
         setThemePack(getThemePack(metaData.theme))
-        if (metaData.bankBalance < MAX_BET) {
+        if (metaData.bankBalance < getMaxBet(props.metaData.bankBalance)) {
             setSliderRange(metaData.bankBalance)
         } else {
-            setSliderRange(MAX_BET)
+            setSliderRange(getMaxBet(props.metaData.bankBalance))
         }
 
-    },[metaData.bankBalance, metaData.theme])
+    }, [metaData.bankBalance, metaData.theme])
 
     const [safety, setSafety] = useState(false);
     const [resultData, setResultData] = useState({

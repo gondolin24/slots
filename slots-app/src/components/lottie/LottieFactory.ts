@@ -15,6 +15,9 @@ import * as DogSpecialCoin from '../../lottie-files/themes/Dogs/specialCoins/Win
 import * as DogWinnerOne from '../../lottie-files/themes/Dogs/winner/winner-one.json'
 import * as DogWinnerTwo from '../../lottie-files/themes/Dogs/winner/winner-two.json'
 import * as DogWinnerThree from '../../lottie-files/themes/Dogs/winner/winner-three.json'
+import * as DogLoserOne from '../../lottie-files/themes/Dogs/loser/losing-one.json'
+import * as DogLoserTwo from '../../lottie-files/themes/Dogs/loser/losing-two.json'
+import * as DogLoserThree from '../../lottie-files/themes/Dogs/loser/losing-three.json'
 
 export function jackPotLottie() {
     return {
@@ -93,7 +96,33 @@ export function winningDog() {
     }
 }
 
-export function losingImage() {
+export function losingDog() {
+    const rand = Math.floor((Math.random() * 3))
+    console.log(rand)
+
+    switch (rand) {
+        case 1:
+            return {
+                src: DogLoserOne,
+                animationDefault: true
+            }
+        case 2:
+            return {
+                src: DogLoserTwo,
+                animationDefault: true
+            }
+        default:
+            return {
+                src: DogLoserThree,
+                animationDefault: true
+            }
+    }
+}
+
+export function losingImage(theme: string = 'default') {
+    if (theme !== 'default') {
+        return losingDog()
+    }
     const rand = Math.floor((Math.random() * 3))
     console.log(rand)
 
@@ -118,9 +147,7 @@ export function losingImage() {
 
 export function getThemePack(theme: string = 'default') {
     const slotImage = (theme === 'default') ? DefaultSlotImage : DogSlot
-
     return {
         slotImage
     }
-
 }

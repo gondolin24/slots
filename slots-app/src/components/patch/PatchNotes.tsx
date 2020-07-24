@@ -6,6 +6,13 @@ const PathNotes: React.FC = () => {
 
     return (
         <IonContent>
+
+            <PathNoteItem items={[
+                'Mat bet follows an algo for scaling',
+                '',
+            ]} patchNumber={'1.3.3'}/>
+
+
             <IonItem lines="none">
                 <IonLabel>
                     Release 1.3.2
