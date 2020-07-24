@@ -101,11 +101,7 @@ const Page: React.FC = () => {
             </IonHeader>
 
             {page}
-            <IonFooter>
-                <IonToolbar>
-                    <IonTitle></IonTitle>
-                </IonToolbar>
-            </IonFooter>
+
         </IonPage>
     );
 };

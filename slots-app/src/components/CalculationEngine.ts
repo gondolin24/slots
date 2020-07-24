@@ -32,7 +32,6 @@ export function getMaxBet(bankBalance: number) {
     while (newMax >= Math.pow(10, power)) {
         power += 1
     }
-    console.log(`${newMax} ${power}`)
     return Math.pow(10, power)
 }
 

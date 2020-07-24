@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {IonButton, IonIcon, IonItem, IonLabel, IonSlide, IonSlides} from "@ionic/react";
+import {IonBadge, IonButton, IonIcon, IonItem, IonLabel, IonSlide, IonSlides} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateGodsBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
+    trans: boolean
+    setTrans: (val: any) => void
     setSetMetaData: (val: any) => void
     metaData: AppMetaData
 }
@@ -18,7 +20,7 @@ const GodsCoinSlide: React.FC<SlideProps> = (props) => {
         const newCost = calculateGodsBonusPrice(props.metaData.getGodsCoinRedeemed())
         setCost(newCost)
         setRedeemable((newCost <= props.metaData.specialCoins))
-    }, [props.metaData.specialCoins])
+    }, [props.metaData.specialCoins, props.metaData.bankBalance])
 
     return (
         <IonSlide>
@@ -47,6 +49,7 @@ const GodsCoinSlide: React.FC<SlideProps> = (props) => {
                 const newCost = calculateGodsBonusPrice(newBalance)
                 setRedeemable((newCost <= props.metaData.specialCoins))
                 props.setSetMetaData(props.metaData)
+                props.setTrans(props.trans)
             }
             }>Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
             }

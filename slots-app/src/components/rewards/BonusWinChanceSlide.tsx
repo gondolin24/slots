@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
+import {IonBadge, IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
+    trans: boolean
+    setTrans: (val: any) => void
     setSetMetaData: (val: any) => void
     metaData: AppMetaData
 }
@@ -18,10 +20,11 @@ const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
         const newCost = calculateWinBonusPrice(props.metaData.getWinBonusAmount())
         setCost(newCost)
         setRedeemable((newCost <= props.metaData.specialCoins))
-    }, [props.metaData.specialCoins])
+    }, [props.metaData.specialCoins, props.metaData.bankBalance])
 
     return (
         <IonSlide>
+
             <h2>Win Chance</h2>
             <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>
             <IonItem>
@@ -47,6 +50,8 @@ const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
                 const newCost = calculateWinBonusPrice(newBalance)
                 setRedeemable((newCost <= props.metaData.specialCoins))
                 props.setSetMetaData(props.metaData)
+                props.setTrans(props.trans)
+
             }
             }>Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
             }

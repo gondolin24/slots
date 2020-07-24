@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
+import {IonBadge, IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateMultiplierBonusPrice, calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
+    trans: boolean
+    setTrans: (val: any) => void
     setSetMetaData: (val: any) => void
     metaData: AppMetaData
 }
@@ -18,10 +20,11 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
         const newCost = calculateMultiplierBonusPrice(props.metaData.getMultiplierBonusAmount())
         setCost(newCost)
         setRedeemable((newCost <= props.metaData.specialCoins))
-    }, [props.metaData.specialCoins])
+    }, [props.metaData.specialCoins, props.metaData.bankBalance])
 
     return (
         <IonSlide>
+
             <h2>Multiplier Bonus</h2>
             <p><b>Multiplier Bonus</b> This bonus scales vertically. Permanently adds a bonus to every win
                 on-top the default multiplier</p>
@@ -48,6 +51,8 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
 
                 setRedeemable((newCost <= props.metaData.specialCoins))
                 props.setSetMetaData(props.metaData)
+                props.setTrans(props.trans)
+
             }
             }>Redeem <IonIcon slot="end" md={arrowForwardSharp}/></IonButton>
             }
