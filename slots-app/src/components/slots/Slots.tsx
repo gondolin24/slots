@@ -8,6 +8,7 @@ import {didSpinWin, getMaxBet} from "../CalculationEngine";
 import {calculateWinBonus} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 import {getThemePack} from "../lottie/LottieFactory";
+import {numberWithCommas} from "../MetaDataUtils";
 
 
 function Greeting(themePack: any) {
@@ -81,7 +82,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                 <IonLabel color={"dark"}>
                     Bank Balance
                 </IonLabel>
-                <IonLabel>{metaData.bankBalance}</IonLabel>
+                <IonLabel>{numberWithCommas(metaData.bankBalance)}</IonLabel>
 
 
             </IonItem>
@@ -98,7 +99,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                            if (metaData.settingsData.vibration) {
                                Vibration.vibrate(500);
                            }
-                       }}>BET {betAmount}</IonButton>
+                       }}>BET {numberWithCommas(betAmount)}</IonButton>
 
             {(metaData.bankBalance >= 25) &&
             <IonItem>
@@ -108,7 +109,7 @@ const Slots: React.FC<SlotsInterface> = (props) => {
                               setBetAmount(value)
                           }}>
                     <IonLabel slot="start">25</IonLabel>
-                    <IonLabel slot="end">{sliderRange}</IonLabel>
+                    <IonLabel slot="end">{numberWithCommas(sliderRange)}</IonLabel>
                 </IonRange>
             </IonItem>
             }

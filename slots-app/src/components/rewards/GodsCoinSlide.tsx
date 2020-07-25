@@ -13,6 +13,7 @@ import {
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateGodsBonus, calculateGodsBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
+import {numberWithCommas} from "../MetaDataUtils";
 
 interface SlideProps {
     trans: boolean
@@ -43,7 +44,7 @@ const GodsCoinSlide: React.FC<SlideProps> = (props) => {
             <p><b>Extra Special Coin</b> is an even more powerful coin. With this, the gods will look down upon you</p>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    {cost} Special coins
+                    {numberWithCommas(cost)} Special coins
                 </IonLabel>
             </IonItem>
             <IonItem>

@@ -3,6 +3,7 @@ import {IonAvatar, IonBadge, IonButton, IonContent, IonIcon, IonItem, IonLabel, 
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateMultiplierBonus, calculateMultiplierBonusPrice, calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
+import {numberWithCommas} from "../MetaDataUtils";
 
 interface SlideProps {
     trans: boolean
@@ -34,7 +35,7 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
                 on-top the default multiplier</p>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    {calculateMultiplierBonusPrice(props.metaData.getMultiplierBonusAmount())} special coins
+                    {numberWithCommas( calculateMultiplierBonusPrice(props.metaData.getMultiplierBonusAmount()))} special coins
                 </IonLabel>
             </IonItem>
             <IonItem>

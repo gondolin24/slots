@@ -7,6 +7,7 @@ import Lottieplayer from "./LottiePlayer";
 import {jackPotLottie, losingImage, specialCoinLottie, winningImage} from "./lottie/LottieFactory";
 import {calculateGodsBonus, calculateMultiplierBonus} from "../TransactionEngine";
 import {AppMetaData} from "../models/AppMetaData";
+import {numberWithCommas} from "./MetaDataUtils";
 
 
 interface ModelProps {
@@ -76,9 +77,10 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             const newBalance = (props.didWin) ? (props.metaData.bankBalance + winLostAmount) : (props.metaData.bankBalance - props.betAmount)
             const bankLabel = ((newBalance < 0) ? 0 : newBalance).toString()
             const totalWinningsLabel = (props.didWin) ? (
-                <BadgeLabel label={'Total Winnings'} labelValue={winLostAmount.toString()} color={'warning'}/>
+                <BadgeLabel label={'Total Winnings'} labelValue={numberWithCommas(winLostAmount)} color={'warning'}/>
             ) : (
-                <BadgeLabel label={'Total Winnings'} labelValue={` - ${props.betAmount}`} color={'danger'}/>
+                <BadgeLabel label={'Total Winnings'} labelValue={` - ${numberWithCommas(props.betAmount)}`}
+                            color={'danger'}/>
             )
 
             const spinResults = (jackPot && props.didWin) ? JackPotLottie() : SpinResult(props.didWin, props.metaData)
@@ -133,11 +135,11 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                             <IonLabel>Winner</IonLabel>
                         </IonItem>
 
-                        <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={props.betAmount.toString()}/>
+                        <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={ numberWithCommas(props.betAmount)}/>
                         <BadgeLabel label={'Multiplier'} color={'primary'}
                                     labelValue={props.resultData.multiplierLabel}/>
                         {props.resultData.totalWinningsLabel}
-                        <BadgeLabel label={'Bank Balance'} labelValue={props.resultData.bankLabel} color={'money'}/>
+                        <BadgeLabel label={'Bank Balance'} labelValue={numberWithCommas(props.resultData.bankLabel)} color={'money'}/>
 
                     </div>
 
@@ -149,8 +151,10 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                             <IonLabel>Try Again</IonLabel>
                         </IonItem>
 
-                        <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={props.betAmount.toString()}/>
-                        <BadgeLabel label={'Bank Balance'} labelValue={props.resultData.bankLabel} color={'danger'}/>
+                        <BadgeLabel label={'Bet Amount'} color={'danger'}
+                                    labelValue={numberWithCommas(props.betAmount)}/>
+                        <BadgeLabel label={'Bank Balance'} labelValue={numberWithCommas(props.resultData.bankLabel)}
+                                    color={'danger'}/>
 
                     </div>
 
@@ -167,14 +171,14 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                     const bonus = ((Math.random() * 100) < 2) ? 1 : 0
                     const nani = ((Math.random() * 1000) < 2) ? 1 : 0
                     const newCoins = 1 + nani + bonus + props.metaData.specialCoins
-                    setSpecialC( 1 + nani + bonus)
+                    setSpecialC(1 + nani + bonus)
                     props.metaData.specialCoins = newCoins
                     props.setSetMetaData(props.metaData)
                     setShowPopover(false)
                 }}
             >
-                    <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>
-                    <p>Special coin earned {specialC}</p>
+                <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>
+                <p>Special coin earned {specialC}</p>
             </IonPopover>
 
         </IonModal>

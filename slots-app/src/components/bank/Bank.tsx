@@ -3,6 +3,7 @@ import {IonAvatar, IonBadge, IonContent, IonItem, IonLabel} from "@ionic/react";
 
 import {AppMetaData} from "../../models/AppMetaData";
 import {calculateGodsBonus, calculateMultiplierBonus, calculateWinBonus} from "../../TransactionEngine";
+import {numberWithCommas} from "../MetaDataUtils";
 
 
 interface BankProps {
@@ -17,13 +18,13 @@ const Bank: React.FC<BankProps> = (props) => {
                 <IonAvatar slot={'start'}>
                     <img src={'https://emoji.gg/assets/emoji/6751_Lemon_cringe_zoom.png'}/>
                 </IonAvatar> <IonLabel>Coin Amount</IonLabel>
-                <IonBadge color={'dark'} slot="end">{props.metaData.bankBalance}</IonBadge>
+                <IonBadge color={'dark'} slot="end">{numberWithCommas(props.metaData.bankBalance)}</IonBadge>
             </IonItem>
             <IonItem>
                 <IonAvatar slot={'start'}>
                     <img src="https://emoji.gg/assets/emoji/6312_poohdance.gif"/>
                 </IonAvatar> <IonLabel>Special Coins</IonLabel>
-                <IonBadge color={'dark'} slot="end">{props.metaData.specialCoins}</IonBadge>
+                <IonBadge color={'dark'} slot="end">{ numberWithCommas(props.metaData.specialCoins)}</IonBadge>
             </IonItem>
             <IonItem>
                 <IonAvatar slot={'start'}>

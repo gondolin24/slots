@@ -9,6 +9,7 @@ const PathNotes: React.FC = () => {
 
             <PathNoteItem items={[
                 "What's a cat's favorite subject in school? Hisss-tory",
+                "Commas on whole numbers",
             ]} patchNumber={'1.4.0'}/>
 
             <PathNoteItem items={[

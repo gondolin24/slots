@@ -17,6 +17,7 @@ import BonusWinChanceSlide from "./BonusWinChanceSlide";
 import SpecialCoinSlide from "./SpecialCoinSlide";
 import GodsCoinSlide from "./GodsCoinSlide";
 import {AppMetaData} from "../../models/AppMetaData";
+import {numberWithCommas} from "../MetaDataUtils";
 
 interface RewardsProps {
     setSetMetaData: (val: any) => void
@@ -35,11 +36,11 @@ const Rewards: React.FC<RewardsProps> = (props) => {
         <IonContent fullscreen className="ion-padding" scroll-y="false">
             <IonItem>
                 <IonLabel>Coin Amount</IonLabel>
-                <IonBadge color={'tertiary'} slot="end">{props.metaData.bankBalance}</IonBadge>
+                <IonBadge color={'tertiary'} slot="end">{numberWithCommas(props.metaData.bankBalance)}</IonBadge>
             </IonItem>
             <IonItem>
                 <IonLabel>Special Coins</IonLabel>
-                <IonBadge color={'warning'} slot="end">{props.metaData.specialCoins}</IonBadge>
+                <IonBadge color={'warning'} slot="end">{numberWithCommas(props.metaData.specialCoins)}</IonBadge>
             </IonItem>
             <IonSlides>
                 <SpecialCoinSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData}

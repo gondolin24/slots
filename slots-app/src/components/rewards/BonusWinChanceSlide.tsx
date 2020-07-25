@@ -3,6 +3,7 @@ import {IonAvatar, IonBadge, IonButton, IonContent, IonIcon, IonItem, IonLabel, 
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateWinBonus, calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
+import {numberWithCommas} from "../MetaDataUtils";
 
 interface SlideProps {
     trans: boolean
@@ -33,7 +34,7 @@ const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
             <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    {cost} special coins
+                    {numberWithCommas(cost)} special coins
                 </IonLabel>
             </IonItem>
             <IonItem>

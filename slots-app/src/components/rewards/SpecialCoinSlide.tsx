@@ -3,6 +3,7 @@ import {IonBadge, IonButton, IonContent, IonIcon, IonItem, IonLabel, IonSlide} f
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
 import {calculateSpecialCoinPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
+import {numberWithCommas} from "../MetaDataUtils";
 
 interface SlideProps {
     trans: boolean
@@ -28,7 +29,7 @@ const SpecialCoinSlide: React.FC<SlideProps> = (props) => {
             <p><b>Special Coin</b> is a powerful coin that is found in game. You can also buy it for coins</p>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    {cost} coins
+                    {numberWithCommas(cost)} coins
                 </IonLabel>
             </IonItem>
             <IonItem>
