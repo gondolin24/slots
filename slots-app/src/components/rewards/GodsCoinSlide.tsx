@@ -37,7 +37,7 @@ const GodsCoinSlide: React.FC<SlideProps> = (props) => {
             <IonItem>
                 <IonLabel>Gods angry</IonLabel>
                 <IonBadge color={'dark'}
-                          slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100) + ' %'}</IonBadge>
+                          slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100).toFixed(2) + ' %'}</IonBadge>
             </IonItem>
             <h2>Extra Special Coin</h2>
             <p><b>Extra Special Coin</b> is an even more powerful coin. With this, the gods will look down upon you</p>

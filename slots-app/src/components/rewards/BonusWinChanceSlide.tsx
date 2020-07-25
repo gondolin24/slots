@@ -27,7 +27,7 @@ const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
             <IonItem>
                 <IonLabel>Probability of Winning</IonLabel>
                 <IonBadge color={'dark'}
-                          slot="end">{((calculateWinBonus(props.metaData.getWinBonusAmount()) + .40) * 100) + ' %'}</IonBadge>
+                          slot="end">{((calculateWinBonus(props.metaData.getWinBonusAmount()) + .40) * 100).toFixed(2) + ' %'}</IonBadge>
             </IonItem>
             <h2>Win Chance</h2>
             <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>

@@ -30,7 +30,7 @@ const Bank: React.FC<BankProps> = (props) => {
                     <img src="https://emoji.gg/assets/emoji/2271_ArabDance.gif"/>
                 </IonAvatar> <IonLabel>Multiplier Bonus</IonLabel>
                 <IonBadge color={'dark'}
-                          slot="end">{calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())}</IonBadge>
+                          slot="end">{calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount()).toFixed(2)}</IonBadge>
             </IonItem>
 
             <IonItem>
@@ -38,14 +38,14 @@ const Bank: React.FC<BankProps> = (props) => {
                     <img src="https://emoji.gg/assets/emoji/4191_StevenUniverseDance.gif"/>
                 </IonAvatar> <IonLabel>Probability of Winning</IonLabel>
                 <IonBadge color={'dark'}
-                          slot="end">{((calculateWinBonus(props.metaData.getWinBonusAmount()) + .40) * 100) + ' %'}</IonBadge>
+                          slot="end">{((calculateWinBonus(props.metaData.getWinBonusAmount()) + .40) * 100).toFixed(2) + ' %'}</IonBadge>
             </IonItem>
             <IonItem>
                 <IonAvatar slot={'start'}>
                     <img src="https://emoji.gg/assets/emoji/6604_oh_god_sign_bean.png"/>
                 </IonAvatar> <IonLabel>Probability zues being angry</IonLabel>
                 <IonBadge color={'dark'}
-                          slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100) + ' %'}</IonBadge>
+                          slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100).toFixed(2) + ' %'}</IonBadge>
             </IonItem>
         </IonContent>
     );
