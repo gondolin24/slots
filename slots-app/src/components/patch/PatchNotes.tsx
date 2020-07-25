@@ -8,8 +8,10 @@ const PathNotes: React.FC = () => {
         <IonContent>
 
             <PathNoteItem items={[
-                'Mat bet follows an algo for scaling',
-                '',
+                "Max bet follows an algo for scaling",
+                "dogs are all here",
+                "Store now shows currency",
+                "Winning multiple SC now shows",
             ]} patchNumber={'1.3.3'}/>
 
 
@@ -45,7 +47,6 @@ const PathNotes: React.FC = () => {
 
             <PathNoteItem items={['Minor UI changes',
                 'Some rewards now redeemable',
-
             ]} patchNumber={'1.3.0'}/>
 
 

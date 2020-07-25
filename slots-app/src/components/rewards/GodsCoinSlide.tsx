@@ -1,7 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {IonBadge, IonButton, IonIcon, IonItem, IonLabel, IonSlide, IonSlides} from "@ionic/react";
+import {
+    IonAvatar,
+    IonBadge,
+    IonButton,
+    IonContent,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonSlide,
+    IonSlides
+} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
-import {calculateGodsBonusPrice} from "../../TransactionEngine";
+import {calculateGodsBonus, calculateGodsBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
@@ -24,6 +34,11 @@ const GodsCoinSlide: React.FC<SlideProps> = (props) => {
 
     return (
         <IonSlide>
+            <IonItem>
+                <IonLabel>Probability zues being angry</IonLabel>
+                <IonBadge color={'dark'}
+                          slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100) + ' %'}</IonBadge>
+            </IonItem>
             <h2>Extra Special Coin</h2>
             <p><b>Extra Special Coin</b> is an even more powerful coin. With this, the gods will look down upon you</p>
             <IonItem>

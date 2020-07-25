@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {IonBadge, IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
+import {IonAvatar, IonBadge, IonButton, IonContent, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
-import {calculateMultiplierBonusPrice, calculateWinBonusPrice} from "../../TransactionEngine";
+import {calculateMultiplierBonus, calculateMultiplierBonusPrice, calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
@@ -24,7 +24,11 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
 
     return (
         <IonSlide>
-
+            <IonItem>
+                <IonLabel>Multiplier Bonus</IonLabel>
+                <IonBadge color={'dark'}
+                          slot="end">{calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())}</IonBadge>
+            </IonItem>
             <h2>Multiplier Bonus</h2>
             <p><b>Multiplier Bonus</b> This bonus scales vertically. Permanently adds a bonus to every win
                 on-top the default multiplier</p>

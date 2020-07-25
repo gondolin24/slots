@@ -41,14 +41,15 @@ export function didSpinWin(bonus: number = 0) {
 }
 
 export function specialCoinEarned(bumpProb: number = 0) {
-    const result1 = Math.floor(Math.random() * 15)
-    const result2 = Math.floor(Math.random() * 15)
-    const result = (result2 === result1)
-    if (result) {
-        return true
-    } else {
-        //generate random number
-        const randomNumber = Math.random()
-        return randomNumber < bumpProb
-    }
+    return true
+    // const result1 = Math.floor(Math.random() * 15)
+    // const result2 = Math.floor(Math.random() * 15)
+    // const result = (result2 === result1)
+    // if (result) {
+    //     return true
+    // } else {
+    //     //generate random number
+    //     const randomNumber = Math.random()
+    //     return randomNumber < bumpProb
+    // }
 }

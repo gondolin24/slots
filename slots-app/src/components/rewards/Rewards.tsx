@@ -44,9 +44,12 @@ const Rewards: React.FC<RewardsProps> = (props) => {
             <IonSlides>
                 <SpecialCoinSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData}
                                   metaData={props.metaData}/>
-                <BonusMultiplierSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
-                <BonusWinChanceSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
-                <GodsCoinSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData} metaData={props.metaData}/>
+                <BonusMultiplierSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData}
+                                      metaData={props.metaData}/>
+                <BonusWinChanceSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData}
+                                     metaData={props.metaData}/>
+                <GodsCoinSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData}
+                               metaData={props.metaData}/>
 
             </IonSlides>
 

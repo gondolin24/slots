@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {IonBadge, IonButton, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
+import {IonAvatar, IonBadge, IonButton, IonContent, IonIcon, IonItem, IonLabel, IonSlide} from "@ionic/react";
 import {arrowForwardSharp, closeSharp} from 'ionicons/icons';
-import {calculateWinBonusPrice} from "../../TransactionEngine";
+import {calculateWinBonus, calculateWinBonusPrice} from "../../TransactionEngine";
 import {AppMetaData} from "../../models/AppMetaData";
 
 interface SlideProps {
@@ -24,7 +24,11 @@ const BonusWinChanceSlide: React.FC<SlideProps> = (props) => {
 
     return (
         <IonSlide>
-
+            <IonItem>
+                <IonLabel>Probability of Winning</IonLabel>
+                <IonBadge color={'dark'}
+                          slot="end">{((calculateWinBonus(props.metaData.getWinBonusAmount()) + .40) * 100) + ' %'}</IonBadge>
+            </IonItem>
             <h2>Win Chance</h2>
             <p><b>Win Change</b> is a powerful bonus. Permanently adds % change of winning. </p>
             <IonItem>

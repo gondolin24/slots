@@ -64,6 +64,7 @@ function SpinResult(win: boolean, metaData: AppMetaData) {
 const ModalResult: React.FC<ModelProps> = (props) => {
 
     const [showPopover, setShowPopover] = useState(false);
+    const [specialC, setSpecialC] = useState(1)
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
@@ -167,13 +168,14 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                     const bonus = ((Math.random() * 100) < 2) ? 1 : 0
                     const nani = ((Math.random() * 1000) < 2) ? 1 : 0
                     const newCoins = 1 + nani + bonus + props.metaData.specialCoins
+                    setSpecialC( 1 + nani + bonus)
                     props.metaData.specialCoins = newCoins
                     props.setSetMetaData(props.metaData)
                     setShowPopover(false)
                 }}
             >
                 <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>
-                <p>Special coin earned</p>
+                <p>Special coin earned {specialC}</p>
             </IonPopover>
 
         </IonModal>
