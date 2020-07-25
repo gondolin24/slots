@@ -3,6 +3,10 @@ slot game
 This is a slot game where you spin to get coins and special coins.
 You use special coins to upgrate stats like win probability.
 
+![Test Image 1](app-video.gif)
+
+
+
 ## Slot component
 consists of various components
 
