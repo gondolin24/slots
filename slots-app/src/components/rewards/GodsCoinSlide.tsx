@@ -35,7 +35,7 @@ const GodsCoinSlide: React.FC<SlideProps> = (props) => {
     return (
         <IonSlide>
             <IonItem>
-                <IonLabel>Probability zues being angry</IonLabel>
+                <IonLabel>Gods angry</IonLabel>
                 <IonBadge color={'dark'}
                           slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100) + ' %'}</IonBadge>
             </IonItem>

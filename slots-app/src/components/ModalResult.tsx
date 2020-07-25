@@ -163,7 +163,6 @@ const ModalResult: React.FC<ModelProps> = (props) => {
 
             <IonPopover
                 isOpen={showPopover}
-                cssClass='my-custom-class'
                 onDidDismiss={e => {
                     const bonus = ((Math.random() * 100) < 2) ? 1 : 0
                     const nani = ((Math.random() * 1000) < 2) ? 1 : 0
@@ -174,8 +173,8 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                     setShowPopover(false)
                 }}
             >
-                <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>
-                <p>Special coin earned {specialC}</p>
+                    <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>
+                    <p>Special coin earned {specialC}</p>
             </IonPopover>
 
         </IonModal>

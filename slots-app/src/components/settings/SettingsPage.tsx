@@ -59,6 +59,8 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
                     }}>
                         <IonSelectOption value="default">default</IonSelectOption>
                         <IonSelectOption value="dogs">dogs</IonSelectOption>
+                        <IonSelectOption value="cats">cats</IonSelectOption>
+
                     </IonSelect>
                 </IonItem>
 

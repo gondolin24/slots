@@ -153,6 +153,14 @@ background: #e3342f;
 
 }
 
+
+.winnerLemon{
+  height: 300px;
+  background: lemonchiffon;
+}
+
+
+
 ion-slides {
   height: 100%;
 }

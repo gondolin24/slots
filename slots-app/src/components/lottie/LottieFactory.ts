@@ -18,6 +18,15 @@ import * as DogWinnerThree from '../../lottie-files/themes/Dogs/winner/winner-th
 import * as DogLoserOne from '../../lottie-files/themes/Dogs/loser/losing-one.json'
 import * as DogLoserTwo from '../../lottie-files/themes/Dogs/loser/losing-two.json'
 import * as DogLoserThree from '../../lottie-files/themes/Dogs/loser/losing-three.json'
+import * as CatSpecialCoin from '../../lottie-files/themes/Cats/specialCoins/Winner.json'
+import * as CatWinnerOne from '../../lottie-files/themes/Cats/winner/winner-one.json'
+import * as CatWinnerTwo from '../../lottie-files/themes/Cats/winner/winner-two.json'
+import * as CatWinnerThree from '../../lottie-files/themes/Cats/winner/winner-three.json'
+import * as CatLoserOne from '../../lottie-files/themes/Cats/loser/losing-one.json'
+import * as CatLoserTwo from '../../lottie-files/themes/Cats/loser/losing-two.json'
+import * as CatLoserThree from '../../lottie-files/themes/Cats/loser/losing-three.json'
+import * as CatSlot from '../../lottie-files/themes/Cats/slot/SlotImage.json'
+
 
 export function jackPotLottie() {
     return {
@@ -28,25 +37,32 @@ export function jackPotLottie() {
 }
 
 export function specialCoinLottie(theme: string = 'default') {
-    if (theme !== 'default') {
-        return {
-            src: DogSpecialCoin,
-            animationDefault: true,
-            className: 'winner'
-        }
+    switch (theme) {
+        case 'dogs':
+            return {
+                src: DogSpecialCoin,
+                animationDefault: true,
+                className: 'winner'
+            }
+
+        case 'cats':
+            return {
+                src: CatSpecialCoin,
+                animationDefault: true,
+                className: 'winner'
+            }
+        default:
+            return {
+                src: SpecialCoin,
+                animationDefault: true,
+                className: 'winner'
+            }
     }
 
-    return {
-        src: SpecialCoin,
-        animationDefault: true,
-        className: 'winner'
-    }
 }
 
-export function winningImage(theme: string = 'default') {
-    if (theme !== 'default') {
-        return winningDog()
-    }
+export function winningDefault() {
+
     const rand = Math.floor((Math.random() * 3))
     switch (rand) {
         case 1:
@@ -69,6 +85,19 @@ export function winningImage(theme: string = 'default') {
                 animationDefault: true
             }
     }
+}
+
+export function winningImage(theme: string = 'default') {
+
+        switch (theme) {
+            case 'dogs':
+                return winningDog()
+            case 'cats':
+                return winningCat()
+            default:
+                return winningDefault()
+        }
+
 }
 
 export function winningDog() {
@@ -96,9 +125,77 @@ export function winningDog() {
     }
 }
 
+export function winningCat() {
+    const rand = Math.floor((Math.random() * 3))
+    switch (rand) {
+        case 1:
+            return {
+                src: CatWinnerOne,
+                animationDefault: true,
+                className: 'winnerLemon'
+            }
+        case 2:
+            return {
+                src: CatWinnerTwo,
+                animationDefault: true,
+                className: 'winnerLightGreen'
+
+            }
+        default:
+            return {
+                src: CatWinnerThree,
+                className: 'winnerAqua',
+                animationDefault: true
+            }
+    }
+}
+
+export function losingCat() {
+    const rand = Math.floor((Math.random() * 3))
+
+    switch (rand) {
+        case 1:
+            return {
+                src: CatLoserOne,
+                animationDefault: true
+            }
+        case 2:
+            return {
+                src: CatLoserTwo,
+                animationDefault: true
+            }
+        default:
+            return {
+                src: CatLoserThree,
+                animationDefault: true
+            }
+    }
+}
+
+export function losingDefault() {
+    const rand = Math.floor((Math.random() * 3))
+
+    switch (rand) {
+        case 1:
+            return {
+                src: LoserOne,
+                animationDefault: true
+            }
+        case 2:
+            return {
+                src: LoserTwo,
+                animationDefault: true
+            }
+        default:
+            return {
+                src: LoserThree,
+                animationDefault: true
+            }
+    }
+}
+
 export function losingDog() {
     const rand = Math.floor((Math.random() * 3))
-    console.log(rand)
 
     switch (rand) {
         case 1:
@@ -120,33 +217,29 @@ export function losingDog() {
 }
 
 export function losingImage(theme: string = 'default') {
-    if (theme !== 'default') {
-        return losingDog()
-    }
-    const rand = Math.floor((Math.random() * 3))
-    console.log(rand)
 
-    switch (rand) {
-        case 1:
-            return {
-                src: LoserOne,
-                animationDefault: true
-            }
-        case 2:
-            return {
-                src: LoserTwo,
-                animationDefault: true
-            }
+    switch (theme) {
+        case 'dogs':
+           return losingDog()
+        case 'cats':
+            return losingCat()
         default:
-            return {
-                src: LoserThree,
-                animationDefault: true
-            }
+            return losingDefault()
     }
 }
 
 export function getThemePack(theme: string = 'default') {
-    const slotImage = (theme === 'default') ? DefaultSlotImage : DogSlot
+    let slotImage: any = DefaultSlotImage
+
+    switch (theme) {
+        case 'dogs':
+            slotImage = DogSlot
+            break;
+        case 'cats':
+            slotImage = CatSlot
+            break
+    }
+
     return {
         slotImage
     }
