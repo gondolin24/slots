@@ -7,7 +7,7 @@ export function calculateMultiplierBonusPrice(timesRedeemed: number = 0) {
 export function calculateMultiplierBonus(timesRedeemed: number = 0) {
     let num = 0
     for (let i = 0; i < timesRedeemed; i++) {
-        num = num + 0.25
+        num = num + 0.40
     }
     return num
 }
@@ -40,6 +40,11 @@ export function calculateGodsBonusPrice(timesRedeemed: number = 0) {
     return Math.ceil(Math.pow(basePrice, power) * basePrice)
 }
 
+export function calculateRangePrice(timesRedeemed: number = 0) {
+    const basePrice = 30
+    const power = (timesRedeemed - 1) * .08
+    return Math.ceil(Math.pow(basePrice, power) * basePrice)
+}
 
 export function calculateCoinFromPercentage(availableMoney: number, timesRedeemed: number) {
 

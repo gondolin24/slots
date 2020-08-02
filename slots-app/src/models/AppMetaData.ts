@@ -47,7 +47,9 @@ export class AppMetaData {
     getGodsCoinRedeemed() {
         return this.storeMetaData.redeemedGodsCoin
     }
-
+    getRangeRedeemed() {
+        return this.storeMetaData.redeemedRange
+    }
     static fromJson(schema: any) {
         const bankBalance = schema.bankBalance
         const rewardMultiplier = schema.rewardMultiplier || 0

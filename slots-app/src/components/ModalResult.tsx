@@ -65,7 +65,7 @@ function SpinResult(win: boolean, metaData: AppMetaData) {
 const ModalResult: React.FC<ModelProps> = (props) => {
 
     const [showPopover, setShowPopover] = useState(false);
-    const [specialC, setSpecialC] = useState(1)
+    const [specialC, setSpecialC] = useState(Math.ceil((Math.random() * props.metaData.getRangeRedeemed())))
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
@@ -135,11 +135,13 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                             <IonLabel>Winner</IonLabel>
                         </IonItem>
 
-                        <BadgeLabel label={'Bet Amount'} color={'danger'} labelValue={ numberWithCommas(props.betAmount)}/>
+                        <BadgeLabel label={'Bet Amount'} color={'danger'}
+                                    labelValue={numberWithCommas(props.betAmount)}/>
                         <BadgeLabel label={'Multiplier'} color={'primary'}
                                     labelValue={props.resultData.multiplierLabel}/>
                         {props.resultData.totalWinningsLabel}
-                        <BadgeLabel label={'Bank Balance'} labelValue={numberWithCommas(props.resultData.bankLabel)} color={'money'}/>
+                        <BadgeLabel label={'Bank Balance'} labelValue={numberWithCommas(props.resultData.bankLabel)}
+                                    color={'money'}/>
 
                     </div>
 
@@ -168,10 +170,9 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             <IonPopover
                 isOpen={showPopover}
                 onDidDismiss={e => {
-                    const bonus = ((Math.random() * 100) < 2) ? 1 : 0
-                    const nani = ((Math.random() * 1000) < 2) ? 1 : 0
-                    const newCoins = 1 + nani + bonus + props.metaData.specialCoins
-                    setSpecialC(1 + nani + bonus)
+                    const bonus = Math.ceil((Math.random() * props.metaData.getRangeRedeemed()))
+                    const newCoins = bonus + props.metaData.specialCoins
+                    setSpecialC(bonus)
                     props.metaData.specialCoins = newCoins
                     props.setSetMetaData(props.metaData)
                     setShowPopover(false)

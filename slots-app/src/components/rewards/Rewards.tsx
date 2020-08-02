@@ -18,6 +18,7 @@ import SpecialCoinSlide from "./SpecialCoinSlide";
 import GodsCoinSlide from "./GodsCoinSlide";
 import {AppMetaData} from "../../models/AppMetaData";
 import {numberWithCommas} from "../MetaDataUtils";
+import BonusSpecialCoinRange from "./BonusSpecialCoinRange";
 
 interface RewardsProps {
     setSetMetaData: (val: any) => void
@@ -51,6 +52,8 @@ const Rewards: React.FC<RewardsProps> = (props) => {
                                      metaData={props.metaData}/>
                 <GodsCoinSlide setTrans={setChildTrans} trans={trans} setSetMetaData={props.setSetMetaData}
                                metaData={props.metaData}/>
+                <BonusSpecialCoinRange trans={trans} setTrans={setChildTrans} setSetMetaData={props.setSetMetaData}
+                                       metaData={props.metaData}/>
 
             </IonSlides>
 

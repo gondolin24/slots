@@ -40,7 +40,7 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
             </IonItem>
             <IonItem>
                 <IonLabel className={'center-align-label'}>
-                    Permanent + 0.25 multiplier
+                    Permanent + 0.40 multiplier
                 </IonLabel>
             </IonItem>
             {!redeemable &&

@@ -24,7 +24,7 @@ const Bank: React.FC<BankProps> = (props) => {
                 <IonAvatar slot={'start'}>
                     <img src="https://emoji.gg/assets/emoji/6312_poohdance.gif"/>
                 </IonAvatar> <IonLabel>Special Coins</IonLabel>
-                <IonBadge color={'dark'} slot="end">{ numberWithCommas(props.metaData.specialCoins)}</IonBadge>
+                <IonBadge color={'dark'} slot="end">{numberWithCommas(props.metaData.specialCoins)}</IonBadge>
             </IonItem>
             <IonItem>
                 <IonAvatar slot={'start'}>
@@ -47,6 +47,13 @@ const Bank: React.FC<BankProps> = (props) => {
                 </IonAvatar> <IonLabel>Probability zues being angry</IonLabel>
                 <IonBadge color={'dark'}
                           slot="end">{((calculateGodsBonus(props.metaData.getGodsCoinRedeemed())) * 100).toFixed(2) + ' %'}</IonBadge>
+            </IonItem>
+            <IonItem>
+                <IonAvatar slot={'start'}>
+                    <img src="https://emoji.gg/assets/emoji/3181_Chibi_Dance_Black.gif"/>
+                </IonAvatar> <IonLabel>Scope range</IonLabel>
+                <IonBadge color={'dark'}
+                          slot="end">1 - {props.metaData.getRangeRedeemed()}</IonBadge>
             </IonItem>
         </IonContent>
     );

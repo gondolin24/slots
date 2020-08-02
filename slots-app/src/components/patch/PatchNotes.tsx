@@ -10,8 +10,8 @@ const PathNotes: React.FC = () => {
             <PathNoteItem items={[
                 "adding multi buy for coins to special coins",
                 "Adding range for coins bonus.",
-                "removing chance to get multiple coins"
-
+                "removing chance to get multiple coins",
+                "Increase multiplier bonus from .25 -> .40"
             ]} patchNumber={'1.5.0'}/>
 
             <PathNoteItem items={[
