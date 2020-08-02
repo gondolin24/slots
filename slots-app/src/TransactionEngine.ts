@@ -41,8 +41,21 @@ export function calculateGodsBonusPrice(timesRedeemed: number = 0) {
 }
 
 
+export function calculateCoinFromPercentage(availableMoney: number, timesRedeemed: number) {
+
+    let count = 1
+    let amount = calculateSpecialCoinPrice(timesRedeemed + count)
+    while (amount < availableMoney) {
+        amount = calculateSpecialCoinPrice(timesRedeemed + (count))
+        count += 1
+    }
+    return count
+
+}
+
 export function calculateSpecialCoinPrice(timesRedeemed: number = 0) {
     const basePrice = 200000
     const power = timesRedeemed * .0001
     return Math.ceil(Math.pow(basePrice, power) * basePrice)
 }
+

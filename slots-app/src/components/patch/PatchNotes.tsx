@@ -8,6 +8,13 @@ const PathNotes: React.FC = () => {
         <IonContent>
 
             <PathNoteItem items={[
+                "adding multi buy for coins to special coins",
+                "Adding range for coins bonus.",
+                "removing chance to get multiple coins"
+
+            ]} patchNumber={'1.5.0'}/>
+
+            <PathNoteItem items={[
                 "What's a cat's favorite subject in school? Hisss-tory",
                 "Commas on whole numbers",
             ]} patchNumber={'1.4.0'}/>
