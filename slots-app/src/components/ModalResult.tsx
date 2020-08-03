@@ -137,10 +137,14 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 props.setSliderMax(getMaxBet(props.metaData.bankBalance))
             }
             const getSpecialCoin = calculateGodsBonus(props.metaData.getGodsCoinRedeemed())
+            const scw = specialCoinEarned(getSpecialCoin)
             if (props.metaData.settingsData.popups) {
-                setShowPopover(specialCoinEarned(getSpecialCoin))
+                setShowPopover(scw)
             } else {
-                setDidWC(specialCoinEarned(getSpecialCoin))
+                setDidWC(scw)
+                if (scw) {
+                    performSpecialCoin()
+                }
             }
 
         }
