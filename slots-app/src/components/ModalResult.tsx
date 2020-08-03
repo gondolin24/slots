@@ -61,11 +61,39 @@ function SpinResult(win: boolean, metaData: AppMetaData) {
     return Lost(metaData.theme)
 }
 
+function popup(doShow: boolean, specialCoins: any, didWC: boolean, fun: () => void, didWin: boolean) {
+    if (!doShow && didWC) {
+        return (
+            <BadgeLabel label={'Special coins'} color={'secondary'}
+                        labelValue={specialCoins}/>
+        )
+    } else {
+        if (didWin) {
+            return (
+                <IonItem>
+                    <IonLabel>Winner</IonLabel>
+                </IonItem>
+            )
+        }
+    }
+}
 
 const ModalResult: React.FC<ModelProps> = (props) => {
 
     const [showPopover, setShowPopover] = useState(false);
     const [specialC, setSpecialC] = useState(Math.ceil((Math.random() * props.metaData.getRangeRedeemed())))
+    const [didWC, setDidWC] = useState(false)
+
+
+    const performSpecialCoin = () => {
+        const bonus = Math.ceil((Math.random() * props.metaData.getRangeRedeemed()))
+        const newCoins = bonus + props.metaData.specialCoins
+        setSpecialC(bonus)
+        props.metaData.specialCoins = newCoins
+        props.setSetMetaData(props.metaData)
+        setShowPopover(false)
+    }
+
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
@@ -73,7 +101,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
             const bump = calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())
             const multiplier = getMultiplier(bump, jackPot)
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
-            const multiplierLabel = `${(multiplier - bump).toFixed(2)} X + ${bump}`
+            const multiplierLabel = `${(multiplier - bump).toFixed(2)} X + ${bump.toFixed(2)}`
             const newBalance = (props.didWin) ? (props.metaData.bankBalance + winLostAmount) : (props.metaData.bankBalance - props.betAmount)
             const bankLabel = ((newBalance < 0) ? 0 : newBalance).toString()
             const totalWinningsLabel = (props.didWin) ? (
@@ -109,7 +137,12 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 props.setSliderMax(getMaxBet(props.metaData.bankBalance))
             }
             const getSpecialCoin = calculateGodsBonus(props.metaData.getGodsCoinRedeemed())
-            setShowPopover(specialCoinEarned(getSpecialCoin))
+            if (props.metaData.settingsData.popups) {
+                setShowPopover(specialCoinEarned(getSpecialCoin))
+            } else {
+                setDidWC(specialCoinEarned(getSpecialCoin))
+            }
+
         }
     })
 
@@ -131,10 +164,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 {
                     props.didWin &&
                     <div>
-                        <IonItem>
-                            <IonLabel>Winner</IonLabel>
-                        </IonItem>
-
+                        {popup(props.metaData.settingsData.popups, specialC, didWC, performSpecialCoin, props.didWin)}
                         <BadgeLabel label={'Bet Amount'} color={'danger'}
                                     labelValue={numberWithCommas(props.betAmount)}/>
                         <BadgeLabel label={'Multiplier'} color={'primary'}
@@ -152,6 +182,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                         <IonItem>
                             <IonLabel>Try Again</IonLabel>
                         </IonItem>
+                        {popup(props.metaData.settingsData.popups, specialC, didWC, performSpecialCoin, props.didWin)}
 
                         <BadgeLabel label={'Bet Amount'} color={'danger'}
                                     labelValue={numberWithCommas(props.betAmount)}/>
@@ -162,20 +193,19 @@ const ModalResult: React.FC<ModelProps> = (props) => {
 
                 }
 
-
             </IonList>
-
-            <IonButton onClick={() => props.setShowModal(false)}>Thanks for playing</IonButton>
-
+            {
+                props.didWin &&
+                <IonButton color={'money'} onClick={() => props.setShowModal(false)}>Thanks for playing</IonButton>
+            }
+            {
+                !props.didWin &&
+                <IonButton color={'danger'} onClick={() => props.setShowModal(false)}>Thanks for playing</IonButton>
+            }
             <IonPopover
                 isOpen={showPopover}
                 onDidDismiss={e => {
-                    const bonus = Math.ceil((Math.random() * props.metaData.getRangeRedeemed()))
-                    const newCoins = bonus + props.metaData.specialCoins
-                    setSpecialC(bonus)
-                    props.metaData.specialCoins = newCoins
-                    props.setSetMetaData(props.metaData)
-                    setShowPopover(false)
+                    performSpecialCoin()
                 }}
             >
                 <Lottieplayer source={special.src} animationDefault={special.animationDefault}/>

@@ -23,7 +23,6 @@ interface SettingsPageProps {
 
 const SettingsPage: React.FC<SettingsPageProps> = (props) => {
     const [theme, setTheme] = useState<string>();
-    const [gender, setGender] = useState<string>();
 
     const [number, setNumber] = useState<number>(props.metaData.bankBalance);
     const [numberSpecial, setNumberSpecial] = useState<number>(props.metaData.specialCoins);
@@ -31,11 +30,14 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
     const [checked, setChecked] = useState(props.metaData.settingsData.vibration);
     const [override, setOverRide] = useState(false);
     const [text, setText] = useState<string>();
+    const [popups, setPopUps] = useState(props.metaData.settingsData.popups);
 
 
     useEffect(() => {
         setChecked((props.metaData.settingsData.vibration))
-    }, [props.metaData.settingsData.vibration])
+        setPopUps((props.metaData.settingsData.popups))
+
+    }, [props.metaData.settingsData])
 
 
     return (
@@ -49,6 +51,16 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
                         props.setSetMetaData(props.metaData)
                     }}/>
                 </IonItem>
+
+                <IonItem>
+                    <IonLabel>Pop ups: {vibrationLabel(popups)}</IonLabel>
+                    <IonToggle checked={popups} onIonChange={e => {
+                        props.metaData.settingsData.popups = e.detail.checked
+                        setPopUps(e.detail.checked)
+                        props.setSetMetaData(props.metaData)
+                    }}/>
+                </IonItem>
+
                 <IonItem>
                     <IonLabel>Theme</IonLabel>
                     <IonSelect value={theme} placeholder="Select theme" onIonChange={e => {
@@ -71,6 +83,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
                     }}/>
                 </IonItem>
 
+
                 {override &&
                 <IonList>
                     <IonItem>
@@ -87,6 +100,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props) => {
                         <IonInput value={text} placeholder="Password" onIonChange={e => setText(e.detail.value!)}
                                   clearInput/>
                     </IonItem>
+
                     <IonButton expand="full" fill="outline" onClick={() => {
                         if (text === 'hhhyyy') {
 

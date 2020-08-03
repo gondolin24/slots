@@ -3,7 +3,7 @@ import {BASE_WIN_PERCENT} from "../SlotConfig";
 export function getMultiplier(bump: number, isJackPot: boolean) {
     const randomNum = (Math.random()) * .75
     const random = (Math.random()) * 2
-    const jackPot = (isJackPot) ? 15 : 0
+    const jackPot = (isJackPot) ? (15 + (6 * bump)) : 0
     return (randomNum + random + bump + jackPot)
 }
 
@@ -41,14 +41,15 @@ export function didSpinWin(bonus: number = 0) {
 }
 
 export function specialCoinEarned(bumpProb: number = 0) {
-    const result1 = Math.floor(Math.random() * 15)
-    const result2 = Math.floor(Math.random() * 15)
-    const result = (result2 === result1)
-    if (result) {
-        return true
-    } else {
-        //generate random number
-        const randomNumber = Math.random()
-        return randomNumber < bumpProb
-    }
+    // const result1 = Math.floor(Math.random() * 15)
+    // const result2 = Math.floor(Math.random() * 15)
+    // const result = (result2 === result1)
+    // if (result) {
+    //     return true
+    // } else {
+    //     //generate random number
+    //     const randomNumber = Math.random()
+    //     return randomNumber < bumpProb
+    // }
+    return true
 }

@@ -28,7 +28,7 @@ const BonusMultiplierSlide: React.FC<SlideProps> = (props) => {
             <IonItem>
                 <IonLabel>Multiplier Bonus</IonLabel>
                 <IonBadge color={'dark'}
-                          slot="end">{calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())}</IonBadge>
+                          slot="end">{calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount()).toFixed(2)}</IonBadge>
             </IonItem>
             <h2>Multiplier Bonus</h2>
             <p><b>Multiplier Bonus</b> This bonus scales vertically. Permanently adds a bonus to every win
