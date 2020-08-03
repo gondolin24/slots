@@ -1,6 +1,6 @@
 {
   "name": "slots",
-  "version": "0.0.1",
+  "version": "1.5.0",
   "private": true,
   "dependencies": {
     "@capacitor/android": "^2.2.1",
