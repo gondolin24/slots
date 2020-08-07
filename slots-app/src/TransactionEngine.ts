@@ -42,7 +42,7 @@ export function calculateGodsBonusPrice(timesRedeemed: number = 0) {
 
 export function calculateRangePrice(timesRedeemed: number = 0) {
     const basePrice = 30
-    const power = (timesRedeemed - 1) * .08
+    const power = (timesRedeemed - 1) * .003
     return Math.ceil(Math.pow(basePrice, power) * basePrice)
 }
 

@@ -97,7 +97,7 @@ const ModalResult: React.FC<ModelProps> = (props) => {
     useEffect(() => {
         if (props.safety) {
             props.setSafety(false)
-            const jackPot = isJackPot()
+            const jackPot = isJackPot(calculateGodsBonus(props.metaData.getGodsCoinRedeemed()))
             const bump = calculateMultiplierBonus(props.metaData.getMultiplierBonusAmount())
             const multiplier = getMultiplier(bump, jackPot)
             const winLostAmount = getWinningAmount(props.didWin, multiplier, props.betAmount)
@@ -120,7 +120,6 @@ const ModalResult: React.FC<ModelProps> = (props) => {
                 bonusMultiplierLabel: `${bump}`
             }
             props.setResultData(data)
-            const oldBalance = props.metaData.bankBalance
             props.metaData.bankBalance = (newBalance < 0) ? 0 : newBalance
             const oldBet = props.betAmount
             props.setSetMetaData(props.metaData)

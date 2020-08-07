@@ -12,13 +12,21 @@ export function getWinningAmount(winCondition: boolean, multiplier: number, betA
     return Math.ceil((betAmount) * multiplier)
 }
 
-export function isJackPot(): boolean {
+export function isJackPot(bumpProb: number): boolean {
     const result1 = Math.floor(Math.random() * 5)
     const result2 = Math.floor(Math.random() * 5)
     const result3 = Math.floor(Math.random() * 5)
     const result4 = Math.floor(Math.random() * 5)
 
-    return result1 === result2 && result2 === result3 && result3 === result4;
+    const didWin = result1 === result2 && result2 === result3 && result3 === result4;
+
+    if (!didWin) {
+        const randomNumber = Math.random()
+        return randomNumber < (bumpProb / 10)
+    }
+
+    return didWin
+
 }
 
 
@@ -41,15 +49,14 @@ export function didSpinWin(bonus: number = 0) {
 }
 
 export function specialCoinEarned(bumpProb: number = 0) {
-    // const result1 = Math.floor(Math.random() * 15)
-    // const result2 = Math.floor(Math.random() * 15)
-    // const result = (result2 === result1)
-    // if (result) {
-    //     return true
-    // } else {
-    //     //generate random number
-    //     const randomNumber = Math.random()
-    //     return randomNumber < bumpProb
-    // }
-    return true
+    const result1 = Math.floor(Math.random() * 15)
+    const result2 = Math.floor(Math.random() * 15)
+    const result = (result2 === result1)
+    if (result) {
+        return true
+    } else {
+        //generate random number
+        const randomNumber = Math.random()
+        return randomNumber < bumpProb
+    }
 }
