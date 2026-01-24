@@ -22,7 +22,7 @@
     "comma-number": "^2.0.1",
     "cordova-plugin-vibration": "^3.1.1",
     "ionicons": "^5.0.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.23",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-lottie": "^1.2.3",
